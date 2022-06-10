@@ -1,0 +1,15 @@
+---
+title: "Sobre"
+image: foto_lucas-lacerda.jpg
+about:
+  template: jolla
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/lucas-lacerda-oliveira-250a31190
+    - icon: github
+      text: Github
+      href: https://github.com/lucaslcroliveira
+---
+
+Local destinnado a compartilhar asnovidades que aprendo no cusrso de tópicos especiais em estatística computacional.
