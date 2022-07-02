@@ -1,0 +1,105 @@
+---
+title: "Comparação de genomas"
+author: "Lucas Lacerda Oliveira"
+date: "2022-06-30"
+categories: [phyton]
+---
+
+### Comparação de genomas
+
+Pretende-se comparar duas sequências de DNA: **SARS-CoV-2** identificado na cidade de Wuhan (China) e o Virus da **Influenza A** identificado na California (US).
+
+O DNA é uma molécula presente em todos os seres vivos, que é responsável por armazenar as caracterı́sticas hereditárias. Ela é composta por sequências de nucleotı́deos, que podem ser de quatro tipos: Adenina (**A**), Timina (**T**), Citosina (**C**) ou Guanina (**G**).
+
+Neste estudo de caso, queremos avaliar se estruturas com funções parecidas de organismos diferentes têm diferenças. Para isso vamos avaliar a quantidade de pares de nucleotı́deos.
+
+Os dados utilizados para este estudo referem-se a sequências de DNA disponı́veis nos seguintes links: [**SARS-CoV-2 Wuhan-Hu-1**](https://www.ncbi.nlm.nih.gov/nuccore/NC_045512.2?report=fasta) e [**Virus da Influenza A (California/07/2009(H1N1))**](https://www.ncbi.nlm.nih.gov/nuccore/CY266194.1?report=fasta).
+
+Para comparar as duas estruturas requere-se um mapa de calor (Heatmap) que permita realizar a comparação dos pares de nucleotı́deos. Comente sobre os resultados encontrados.
+
+```{r echo=FALSE}
+library(reticulate)
+```
+
+```{python}
+import numpy as np
+```
+
+```{python}
+covid = open('sequence_covid.txt').read()
+influenza = open('sequence_influenza.txt').read()
+```
+
+```{python}
+ref_covid = {
+    'AA': covid.count('AA'),
+    'AT': covid.count('AT'),
+    'AC': covid.count('AC'),
+    'AG': covid.count('AG'),
+    'TT': covid.count('TT'),
+    'TC': covid.count('TC'),
+    'TG': covid.count('TG'),
+    'TA': covid.count('TA'),
+    'CC': covid.count('CC'),
+    'CA': covid.count('CA'),
+    'CG': covid.count('CG'),
+    'CT': covid.count('CT'),
+    'GG': covid.count('GG'),
+    'GA': covid.count('GA'),
+    'GC': covid.count('GC'),
+    'GT': covid.count('GT'),
+}
+
+print(ref_covid)
+
+val_covid = [ref_covid['AA'], ref_covid['AC'], ref_covid['AG'], ref_covid['AT'], ref_covid['CA'], ref_covid['CC'], ref_covid['CG'], ref_covid['CT'], ref_covid['GA'], ref_covid['GC'], ref_covid['GG'], ref_covid['GT'], ref_covid['TA'], ref_covid['TC'], ref_covid['TG'], ref_covid['TT']]
+
+matriz_covid = np.array(val_covid).reshape(4, 4)
+print(matriz_covid)
+```
+
+```{python,eval=FALSE}
+plt.imshow(matriz_covid, cmap = 'Blues', origin="lower")
+plt.xlabel('Segunda letra'); plt.ylabel('Primeira letra')
+plt.xticks((0,1,2,3),['A','C','G','T'])
+plt.yticks([3, 2, 1, 0],['T','G','C','A'])
+plt.title("Covid-19")
+_ = plt.colorbar()
+```
+
+```{python}
+ref_inf = {
+    'AA': influenza.count('AA'),
+    'AT': influenza.count('AT'),
+    'AC': influenza.count('AC'),
+    'AG': influenza.count('AG'),
+    'TT': influenza.count('TT'),
+    'TC': influenza.count('TC'),
+    'TG': influenza.count('TG'),
+    'TA': influenza.count('TA'),
+    'CC': influenza.count('CC'),
+    'CA': influenza.count('CA'),
+    'CG': influenza.count('CG'),
+    'CT': influenza.count('CT'),
+    'GG': influenza.count('GG'),
+    'GA': influenza.count('GA'),
+    'GC': influenza.count('GC'),
+    'GT': influenza.count('GT'),
+}
+
+print(ref_inf)
+
+val_inf = [ref_inf['AA'], ref_inf['AC'], ref_inf['AG'], ref_inf['AT'], ref_inf['CA'], ref_inf['CC'], ref_inf['CG'], ref_inf['CT'], ref_inf['GA'], ref_inf['GC'], ref_inf['GG'], ref_inf['GT'], ref_inf['TA'], ref_inf['TC'], ref_inf['TG'], ref_inf['TT']]
+
+matriz_inf = np.array(val_inf).reshape(4, 4)
+print(matriz_inf)
+```
+
+```{python,eval=FALSE}
+plt.imshow(matriz_inf, cmap = 'Blues', origin="lower")
+plt.xlabel('Segunda letra'); plt.ylabel('Primeira letra')
+plt.xticks((0,1,2,3),['A','C','G','T'])
+plt.yticks([3, 2, 1, 0],['T','G','C','A'])
+plt.title("Covid-19")
+_ = plt.colorbar()
+```
