@@ -67,6 +67,8 @@ plt.title("Covid-19")
 _ = plt.colorbar()
 ```
 
+![](output_6_0.png)
+
 ```{python}
 ref_inf = {
     'AA': influenza.count('AA'),
@@ -103,3 +105,5 @@ plt.yticks([3, 2, 1, 0],['T','G','C','A'])
 plt.title("Covid-19")
 _ = plt.colorbar()
 ```
+
+![](output_10_0.png)
