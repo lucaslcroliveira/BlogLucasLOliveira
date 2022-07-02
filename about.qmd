@@ -12,4 +12,4 @@ about:
       href: https://github.com/lucaslcroliveira
 ---
 
-Local destinnado a compartilhar asnovidades que aprendo no cusrso de tópicos especiais em estatística computacional.
+Local destinado a compartilhar as novidades que aprendo no curso de tópicos especiais em estatística computacional ministrado por Fábio Fajardo.
