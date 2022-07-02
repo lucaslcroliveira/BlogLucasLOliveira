@@ -7,6 +7,8 @@ categories: [phyton]
 
 ### Comparação de genomas
 
+#### Enunciado
+
 Pretende-se comparar duas sequências de DNA: **SARS-CoV-2** identificado na cidade de Wuhan (China) e o Virus da **Influenza A** identificado na California (US).
 
 O DNA é uma molécula presente em todos os seres vivos, que é responsável por armazenar as caracterı́sticas hereditárias. Ela é composta por sequências de nucleotı́deos, que podem ser de quatro tipos: Adenina (**A**), Timina (**T**), Citosina (**C**) ou Guanina (**G**).
@@ -17,7 +19,11 @@ Os dados utilizados para este estudo referem-se a sequências de DNA disponı́v
 
 Para comparar as duas estruturas requere-se um mapa de calor (Heatmap) que permita realizar a comparação dos pares de nucleotı́deos. Comente sobre os resultados encontrados.
 
-```{r echo=FALSE}
+#### Desenvolvimento
+
+Para desenvolvermos o que foi enunciado acima utilizaremos o pacote `reticulate` que nos permite utilizar o `python` no RStudio. Dessa forma veremos abaixo que alguns dos pacotes não estarão sendo importados com o `import matplotlib.pyplot as plt`, por não ser necessário a sua importação, mas no decorrer do código será utilizado.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(reticulate)
 ```
 

@@ -194,51 +194,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <section id="comparação-de-genomas" class="level3">
 <h3 class="anchored" data-anchor-id="comparação-de-genomas">Comparação de genomas</h3>
+<section id="enunciado" class="level4">
+<h4 class="anchored" data-anchor-id="enunciado">Enunciado</h4>
 <p>Pretende-se comparar duas sequências de DNA: <strong>SARS-CoV-2</strong> identificado na cidade de Wuhan (China) e o Virus da <strong>Influenza A</strong> identificado na California (US).</p>
 <p>O DNA é uma molécula presente em todos os seres vivos, que é responsável por armazenar as caracterı́sticas hereditárias. Ela é composta por sequências de nucleotı́deos, que podem ser de quatro tipos: Adenina (<strong>A</strong>), Timina (<strong>T</strong>), Citosina (<strong>C</strong>) ou Guanina (<strong>G</strong>).</p>
 <p>Neste estudo de caso, queremos avaliar se estruturas com funções parecidas de organismos diferentes têm diferenças. Para isso vamos avaliar a quantidade de pares de nucleotı́deos.</p>
 <p>Os dados utilizados para este estudo referem-se a sequências de DNA disponı́veis nos seguintes links: <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_045512.2?report=fasta"><strong>SARS-CoV-2 Wuhan-Hu-1</strong></a> e <a href="https://www.ncbi.nlm.nih.gov/nuccore/CY266194.1?report=fasta"><strong>Virus da Influenza A (California/07/2009(H1N1))</strong></a>.</p>
 <p>Para comparar as duas estruturas requere-se um mapa de calor (Heatmap) que permita realizar a comparação dos pares de nucleotı́deos. Comente sobre os resultados encontrados.</p>
+</section>
+<section id="desenvolvimento" class="level4">
+<h4 class="anchored" data-anchor-id="desenvolvimento">Desenvolvimento</h4>
+<p>Para desenvolvermos o que foi enunciado acima utilizaremos o pacote <code>reticulate</code> que nos permite utilizar o <code>python</code> no RStudio. Dessa forma veremos abaixo que alguns dos pacotes não estarão sendo importados com o <code>import matplotlib.pyplot as plt</code>, por não ser necessário a sua importação, mas no decorrer do código será utilizado.</p>
 <div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'reticulate' was built under R version 4.1.3</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>covid <span class="op">=</span> <span class="bu">open</span>(<span class="st">'sequence_covid.txt'</span>).read()</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>influenza <span class="op">=</span> <span class="bu">open</span>(<span class="st">'sequence_influenza.txt'</span>).read()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ref_covid <span class="op">=</span> {</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AA'</span>: covid.count(<span class="st">'AA'</span>),</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AT'</span>: covid.count(<span class="st">'AT'</span>),</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AC'</span>: covid.count(<span class="st">'AC'</span>),</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AG'</span>: covid.count(<span class="st">'AG'</span>),</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'TT'</span>: covid.count(<span class="st">'TT'</span>),</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'TC'</span>: covid.count(<span class="st">'TC'</span>),</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'TG'</span>: covid.count(<span class="st">'TG'</span>),</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'TA'</span>: covid.count(<span class="st">'TA'</span>),</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'CC'</span>: covid.count(<span class="st">'CC'</span>),</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'CA'</span>: covid.count(<span class="st">'CA'</span>),</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'CG'</span>: covid.count(<span class="st">'CG'</span>),</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'CT'</span>: covid.count(<span class="st">'CT'</span>),</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'GG'</span>: covid.count(<span class="st">'GG'</span>),</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">'GA'</span>: covid.count(<span class="st">'GA'</span>),</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">'GC'</span>: covid.count(<span class="st">'GC'</span>),</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">'GT'</span>: covid.count(<span class="st">'GT'</span>),</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ref_covid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>covid <span class="op">=</span> <span class="bu">open</span>(<span class="st">'sequence_covid.txt'</span>).read()</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>influenza <span class="op">=</span> <span class="bu">open</span>(<span class="st">'sequence_influenza.txt'</span>).read()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ref_covid <span class="op">=</span> {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AA'</span>: covid.count(<span class="st">'AA'</span>),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AT'</span>: covid.count(<span class="st">'AT'</span>),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AC'</span>: covid.count(<span class="st">'AC'</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AG'</span>: covid.count(<span class="st">'AG'</span>),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'TT'</span>: covid.count(<span class="st">'TT'</span>),</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'TC'</span>: covid.count(<span class="st">'TC'</span>),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'TG'</span>: covid.count(<span class="st">'TG'</span>),</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'TA'</span>: covid.count(<span class="st">'TA'</span>),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'CC'</span>: covid.count(<span class="st">'CC'</span>),</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'CA'</span>: covid.count(<span class="st">'CA'</span>),</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'CG'</span>: covid.count(<span class="st">'CG'</span>),</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'CT'</span>: covid.count(<span class="st">'CT'</span>),</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'GG'</span>: covid.count(<span class="st">'GG'</span>),</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">'GA'</span>: covid.count(<span class="st">'GA'</span>),</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">'GC'</span>: covid.count(<span class="st">'GC'</span>),</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">'GT'</span>: covid.count(<span class="st">'GT'</span>),</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ref_covid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{'AA': 2144, 'AT': 2276, 'AC': 1999, 'AG': 1711, 'TT': 2439, 'TC': 1407, 'TG': 2549, 'TA': 2338, 'CC': 770, 'CA': 2053, 'CG': 427, 'CT': 2049, 'GG': 958, 'GA': 1586, 'GC': 1153, 'GT': 1962}</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>val_covid <span class="op">=</span> [ref_covid[<span class="st">'AA'</span>], ref_covid[<span class="st">'AC'</span>], ref_covid[<span class="st">'AG'</span>], ref_covid[<span class="st">'AT'</span>], ref_covid[<span class="st">'CA'</span>], ref_covid[<span class="st">'CC'</span>], ref_covid[<span class="st">'CG'</span>], ref_covid[<span class="st">'CT'</span>], ref_covid[<span class="st">'GA'</span>], ref_covid[<span class="st">'GC'</span>], ref_covid[<span class="st">'GG'</span>], ref_covid[<span class="st">'GT'</span>], ref_covid[<span class="st">'TA'</span>], ref_covid[<span class="st">'TC'</span>], ref_covid[<span class="st">'TG'</span>], ref_covid[<span class="st">'TT'</span>]]</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>matriz_covid <span class="op">=</span> np.array(val_covid).reshape(<span class="dv">4</span>, <span class="dv">4</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(matriz_covid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>val_covid <span class="op">=</span> [ref_covid[<span class="st">'AA'</span>], ref_covid[<span class="st">'AC'</span>], ref_covid[<span class="st">'AG'</span>], ref_covid[<span class="st">'AT'</span>], ref_covid[<span class="st">'CA'</span>], ref_covid[<span class="st">'CC'</span>], ref_covid[<span class="st">'CG'</span>], ref_covid[<span class="st">'CT'</span>], ref_covid[<span class="st">'GA'</span>], ref_covid[<span class="st">'GC'</span>], ref_covid[<span class="st">'GG'</span>], ref_covid[<span class="st">'GT'</span>], ref_covid[<span class="st">'TA'</span>], ref_covid[<span class="st">'TC'</span>], ref_covid[<span class="st">'TG'</span>], ref_covid[<span class="st">'TT'</span>]]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>matriz_covid <span class="op">=</span> np.array(val_covid).reshape(<span class="dv">4</span>, <span class="dv">4</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(matriz_covid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[2144 1999 1711 2276]
  [2053  770  427 2049]
@@ -247,42 +251,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.imshow(matriz_covid, cmap <span class="op">=</span> <span class="st">'Blues'</span>, origin<span class="op">=</span><span class="st">"lower"</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Segunda letra'</span>)<span class="op">;</span> plt.ylabel(<span class="st">'Primeira letra'</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plt.xticks((<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>),[<span class="st">'A'</span>,<span class="st">'C'</span>,<span class="st">'G'</span>,<span class="st">'T'</span>])</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>plt.yticks([<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>],[<span class="st">'T'</span>,<span class="st">'G'</span>,<span class="st">'C'</span>,<span class="st">'A'</span>])</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Covid-19"</span>)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> plt.colorbar()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plt.imshow(matriz_covid, cmap <span class="op">=</span> <span class="st">'Blues'</span>, origin<span class="op">=</span><span class="st">"lower"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Segunda letra'</span>)<span class="op">;</span> plt.ylabel(<span class="st">'Primeira letra'</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.xticks((<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>),[<span class="st">'A'</span>,<span class="st">'C'</span>,<span class="st">'G'</span>,<span class="st">'T'</span>])</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>plt.yticks([<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>],[<span class="st">'T'</span>,<span class="st">'G'</span>,<span class="st">'C'</span>,<span class="st">'A'</span>])</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Covid-19"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> plt.colorbar()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><img src="output_6_0.png" class="img-fluid"></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ref_inf <span class="op">=</span> {</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AA'</span>: influenza.count(<span class="st">'AA'</span>),</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AT'</span>: influenza.count(<span class="st">'AT'</span>),</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AC'</span>: influenza.count(<span class="st">'AC'</span>),</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AG'</span>: influenza.count(<span class="st">'AG'</span>),</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'TT'</span>: influenza.count(<span class="st">'TT'</span>),</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'TC'</span>: influenza.count(<span class="st">'TC'</span>),</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'TG'</span>: influenza.count(<span class="st">'TG'</span>),</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'TA'</span>: influenza.count(<span class="st">'TA'</span>),</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'CC'</span>: influenza.count(<span class="st">'CC'</span>),</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'CA'</span>: influenza.count(<span class="st">'CA'</span>),</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'CG'</span>: influenza.count(<span class="st">'CG'</span>),</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'CT'</span>: influenza.count(<span class="st">'CT'</span>),</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'GG'</span>: influenza.count(<span class="st">'GG'</span>),</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">'GA'</span>: influenza.count(<span class="st">'GA'</span>),</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">'GC'</span>: influenza.count(<span class="st">'GC'</span>),</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">'GT'</span>: influenza.count(<span class="st">'GT'</span>),</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ref_inf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ref_inf <span class="op">=</span> {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AA'</span>: influenza.count(<span class="st">'AA'</span>),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AT'</span>: influenza.count(<span class="st">'AT'</span>),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AC'</span>: influenza.count(<span class="st">'AC'</span>),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AG'</span>: influenza.count(<span class="st">'AG'</span>),</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'TT'</span>: influenza.count(<span class="st">'TT'</span>),</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'TC'</span>: influenza.count(<span class="st">'TC'</span>),</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'TG'</span>: influenza.count(<span class="st">'TG'</span>),</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'TA'</span>: influenza.count(<span class="st">'TA'</span>),</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'CC'</span>: influenza.count(<span class="st">'CC'</span>),</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'CA'</span>: influenza.count(<span class="st">'CA'</span>),</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'CG'</span>: influenza.count(<span class="st">'CG'</span>),</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'CT'</span>: influenza.count(<span class="st">'CT'</span>),</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'GG'</span>: influenza.count(<span class="st">'GG'</span>),</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">'GA'</span>: influenza.count(<span class="st">'GA'</span>),</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">'GC'</span>: influenza.count(<span class="st">'GC'</span>),</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">'GT'</span>: influenza.count(<span class="st">'GT'</span>),</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ref_inf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{'AA': 130, 'AT': 117, 'AC': 75, 'AG': 141, 'TT': 54, 'TC': 81, 'TG': 112, 'TA': 48, 'CC': 56, 'CA': 128, 'CG': 37, 'CT': 67, 'GG': 90, 'GA': 158, 'GC': 75, 'GT': 61}</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>val_inf <span class="op">=</span> [ref_inf[<span class="st">'AA'</span>], ref_inf[<span class="st">'AC'</span>], ref_inf[<span class="st">'AG'</span>], ref_inf[<span class="st">'AT'</span>], ref_inf[<span class="st">'CA'</span>], ref_inf[<span class="st">'CC'</span>], ref_inf[<span class="st">'CG'</span>], ref_inf[<span class="st">'CT'</span>], ref_inf[<span class="st">'GA'</span>], ref_inf[<span class="st">'GC'</span>], ref_inf[<span class="st">'GG'</span>], ref_inf[<span class="st">'GT'</span>], ref_inf[<span class="st">'TA'</span>], ref_inf[<span class="st">'TC'</span>], ref_inf[<span class="st">'TG'</span>], ref_inf[<span class="st">'TT'</span>]]</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>matriz_inf <span class="op">=</span> np.array(val_inf).reshape(<span class="dv">4</span>, <span class="dv">4</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(matriz_inf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>val_inf <span class="op">=</span> [ref_inf[<span class="st">'AA'</span>], ref_inf[<span class="st">'AC'</span>], ref_inf[<span class="st">'AG'</span>], ref_inf[<span class="st">'AT'</span>], ref_inf[<span class="st">'CA'</span>], ref_inf[<span class="st">'CC'</span>], ref_inf[<span class="st">'CG'</span>], ref_inf[<span class="st">'CT'</span>], ref_inf[<span class="st">'GA'</span>], ref_inf[<span class="st">'GC'</span>], ref_inf[<span class="st">'GG'</span>], ref_inf[<span class="st">'GT'</span>], ref_inf[<span class="st">'TA'</span>], ref_inf[<span class="st">'TC'</span>], ref_inf[<span class="st">'TG'</span>], ref_inf[<span class="st">'TT'</span>]]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>matriz_inf <span class="op">=</span> np.array(val_inf).reshape(<span class="dv">4</span>, <span class="dv">4</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(matriz_inf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[130  75 141 117]
  [128  56  37  67]
@@ -291,16 +295,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plt.imshow(matriz_inf, cmap <span class="op">=</span> <span class="st">'Blues'</span>, origin<span class="op">=</span><span class="st">"lower"</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Segunda letra'</span>)<span class="op">;</span> plt.ylabel(<span class="st">'Primeira letra'</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>plt.xticks((<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>),[<span class="st">'A'</span>,<span class="st">'C'</span>,<span class="st">'G'</span>,<span class="st">'T'</span>])</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>plt.yticks([<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>],[<span class="st">'T'</span>,<span class="st">'G'</span>,<span class="st">'C'</span>,<span class="st">'A'</span>])</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Covid-19"</span>)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> plt.colorbar()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>plt.imshow(matriz_inf, cmap <span class="op">=</span> <span class="st">'Blues'</span>, origin<span class="op">=</span><span class="st">"lower"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Segunda letra'</span>)<span class="op">;</span> plt.ylabel(<span class="st">'Primeira letra'</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>plt.xticks((<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>),[<span class="st">'A'</span>,<span class="st">'C'</span>,<span class="st">'G'</span>,<span class="st">'T'</span>])</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>plt.yticks([<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>],[<span class="st">'T'</span>,<span class="st">'G'</span>,<span class="st">'C'</span>,<span class="st">'A'</span>])</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Covid-19"</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> plt.colorbar()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><img src="output_10_0.png" class="img-fluid"></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
