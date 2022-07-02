@@ -9,7 +9,7 @@
 <meta name="author" content="Lucas Lacerda Oliveira">
 <meta name="dcterms.date" content="2022-06-30">
 
-<title>Lucas L Oliveira - Comparação de genomas</title>
+<title>Lucas L Oliveira - Comparação de sequência de genomas</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -155,9 +155,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Comparação de genomas</h1>
+      <h1 class="title">Comparação de sequência de genomas</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">phyton</div>
+                <div class="quarto-category">heatmap</div>
+                <div class="quarto-category">numpy</div>
               </div>
                   </div>
   </div>
@@ -192,18 +194,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<section id="comparação-de-genomas" class="level3">
-<h3 class="anchored" data-anchor-id="comparação-de-genomas">Comparação de genomas</h3>
-<section id="enunciado" class="level4">
-<h4 class="anchored" data-anchor-id="enunciado">Enunciado</h4>
+<section id="enunciado" class="level3">
+<h3 class="anchored" data-anchor-id="enunciado">Enunciado</h3>
 <p>Pretende-se comparar duas sequências de DNA: <strong>SARS-CoV-2</strong> identificado na cidade de Wuhan (China) e o Virus da <strong>Influenza A</strong> identificado na California (US).</p>
 <p>O DNA é uma molécula presente em todos os seres vivos, que é responsável por armazenar as caracterı́sticas hereditárias. Ela é composta por sequências de nucleotı́deos, que podem ser de quatro tipos: Adenina (<strong>A</strong>), Timina (<strong>T</strong>), Citosina (<strong>C</strong>) ou Guanina (<strong>G</strong>).</p>
 <p>Neste estudo de caso, queremos avaliar se estruturas com funções parecidas de organismos diferentes têm diferenças. Para isso vamos avaliar a quantidade de pares de nucleotı́deos.</p>
 <p>Os dados utilizados para este estudo referem-se a sequências de DNA disponı́veis nos seguintes links: <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_045512.2?report=fasta"><strong>SARS-CoV-2 Wuhan-Hu-1</strong></a> e <a href="https://www.ncbi.nlm.nih.gov/nuccore/CY266194.1?report=fasta"><strong>Virus da Influenza A (California/07/2009(H1N1))</strong></a>.</p>
 <p>Para comparar as duas estruturas requere-se um mapa de calor (Heatmap) que permita realizar a comparação dos pares de nucleotı́deos. Comente sobre os resultados encontrados.</p>
 </section>
-<section id="desenvolvimento" class="level4">
-<h4 class="anchored" data-anchor-id="desenvolvimento">Desenvolvimento</h4>
+<section id="desenvolvimento" class="level3">
+<h3 class="anchored" data-anchor-id="desenvolvimento">Desenvolvimento</h3>
 <p>Para desenvolvermos o que foi enunciado acima utilizaremos o pacote <code>reticulate</code> que nos permite utilizar o <code>python</code> no RStudio. Dessa forma veremos abaixo que alguns dos pacotes não estarão sendo importados com o <code>import matplotlib.pyplot as plt</code>, por não ser necessário a sua importação, mas no decorrer do código será utilizado.</p>
 <div class="cell">
 
@@ -305,7 +305,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="output_10_0.png" class="img-fluid"></p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

@@ -1,13 +1,11 @@
 ---
-title: "Comparação de genomas"
+title: "Comparação de sequência de genomas"
 author: "Lucas Lacerda Oliveira"
 date: "2022-06-30"
-categories: [phyton]
+categories: [phyton, heatmap, numpy]
 ---
 
-### Comparação de genomas
-
-#### Enunciado
+### Enunciado
 
 Pretende-se comparar duas sequências de DNA: **SARS-CoV-2** identificado na cidade de Wuhan (China) e o Virus da **Influenza A** identificado na California (US).
 
@@ -19,7 +17,7 @@ Os dados utilizados para este estudo referem-se a sequências de DNA disponı́v
 
 Para comparar as duas estruturas requere-se um mapa de calor (Heatmap) que permita realizar a comparação dos pares de nucleotı́deos. Comente sobre os resultados encontrados.
 
-#### Desenvolvimento
+### Desenvolvimento
 
 Para desenvolvermos o que foi enunciado acima utilizaremos o pacote `reticulate` que nos permite utilizar o `python` no RStudio. Dessa forma veremos abaixo que alguns dos pacotes não estarão sendo importados com o `import matplotlib.pyplot as plt`, por não ser necessário a sua importação, mas no decorrer do código será utilizado.
 
