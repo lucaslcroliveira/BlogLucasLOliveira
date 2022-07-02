@@ -2,7 +2,7 @@ project:
   type: website
 
 website:
-  title: "Lucas L Oliveira" 
+  title: "Início" 
   navbar:
     right:
       - about.qmd
