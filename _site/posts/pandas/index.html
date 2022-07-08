@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.562">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Lucas Lacerda Oliveira">
+<meta name="dcterms.date" content="2022-07-07">
+
+<title>Início - Explorando o pacote pandas</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Início</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">Sobre</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/lucaslcroliveira"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Explorando o pacote pandas</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">phyton</div>
+                <div class="quarto-category">pandas</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Lucas Lacerda Oliveira </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">July 7, 2022</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<div class="cell">
+<div class="cell-output-display">
+
+<h1>Introdução</h1>
+
+<p>O pacote pandas é considerado por muitos o melhor pacote da linguagem de programação <code>python</code> para trabalhar com dataframes. Nesse post iremos explorar melhor o que esse pacote traz de facilidade na hora de analisarmos dados. A base de dados utilizada é disponibilizada pelo kaggle e nela temos informações sobre vacinação em diversos países.</p>
+
+<h1>Desenvolvimento</h1>
+
+<p>Começamos importando o pacote pandas e informando como iremos chamar o pacote no decorrer do nosso código (<code>pd</code>).</p>
+
+<pre><code class="python">import pandas as pd
+</code></pre>
+
+<p>Após importação do pacote iremos fazer importação da base de dados utilizando a função <code>read_csv</code> e iremos atribuir a base de dados para o objeto <code>df</code>.</p>
+
+<pre><code class="python">df = pd.read_csv("C:/Users/Lucas/Downloads/country_vaccinations.csv")
+</code></pre>
+
+<p>Para ver se deu tudo certo na importação da base de dados podemos visualizar o começo da nossa base de dados com a função base do <code>python</code> chamada <code>head</code>. Por default vemos as primeiras 4 observações da base, mas podemos alterar o argumento de quantas obserações queremos ter como output.</p>
+
+<pre><code class="python">df.head()
+</code></pre>
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>country</th>
+      <th>iso_code</th>
+      <th>date</th>
+      <th>total_vaccinations</th>
+      <th>people_vaccinated</th>
+      <th>people_fully_vaccinated</th>
+      <th>daily_vaccinations_raw</th>
+      <th>daily_vaccinations</th>
+      <th>total_vaccinations_per_hundred</th>
+      <th>people_vaccinated_per_hundred</th>
+      <th>people_fully_vaccinated_per_hundred</th>
+      <th>daily_vaccinations_per_million</th>
+      <th>vaccines</th>
+      <th>source_name</th>
+      <th>source_website</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Albania</td>
+      <td>ALB</td>
+      <td>2021-01-10</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Pfizer/BioNTech</td>
+      <td>Ministry of Health</td>
+      <td>https://shendetesia.gov.al/vaksinimi-anticovid…</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Albania</td>
+      <td>ALB</td>
+      <td>2021-01-11</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>64.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>22.0</td>
+      <td>Pfizer/BioNTech</td>
+      <td>Ministry of Health</td>
+      <td>https://shendetesia.gov.al/vaksinimi-anticovid…</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Albania</td>
+      <td>ALB</td>
+      <td>2021-01-12</td>
+      <td>128.0</td>
+      <td>128.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>64.0</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>NaN</td>
+      <td>22.0</td>
+      <td>Pfizer/BioNTech</td>
+      <td>Ministry of Health</td>
+      <td>https://shendetesia.gov.al/vaksinimi-anticovid…</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Albania</td>
+      <td>ALB</td>
+      <td>2021-01-13</td>
+      <td>188.0</td>
+      <td>188.0</td>
+      <td>NaN</td>
+      <td>60.0</td>
+      <td>63.0</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>NaN</td>
+      <td>22.0</td>
+      <td>Pfizer/BioNTech</td>
+      <td>Ministry of Health</td>
+      <td>https://shendetesia.gov.al/vaksinimi-anticovid…</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Albania</td>
+      <td>ALB</td>
+      <td>2021-01-14</td>
+      <td>266.0</td>
+      <td>266.0</td>
+      <td>NaN</td>
+      <td>78.0</td>
+      <td>66.0</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>NaN</td>
+      <td>23.0</td>
+      <td>Pfizer/BioNTech</td>
+      <td>Ministry of Health</td>
+      <td>https://shendetesia.gov.al/vaksinimi-anticovid…</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>Para obter informações gerais sobre a base de dados podemos utilizar a função <code>info</code> que nos retorna as informações sobre o preenchimento e a classe de cada uma das variáveis.</p>
+
+<pre><code class="python">df.info() # informações sobre a base de dados
+</code></pre>
+
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 3396 entries, 0 to 3395
+Data columns (total 15 columns):
+ #   Column                               Non-Null Count  Dtype  
+---  ------                               --------------  -----  
+ 0   country                              3396 non-null   object 
+ 1   iso_code                             3132 non-null   object 
+ 2   date                                 3396 non-null   object 
+ 3   total_vaccinations                   2225 non-null   float64
+ 4   people_vaccinated                    1833 non-null   float64
+ 5   people_fully_vaccinated              1186 non-null   float64
+ 6   daily_vaccinations_raw               1861 non-null   float64
+ 7   daily_vaccinations                   3264 non-null   float64
+ 8   total_vaccinations_per_hundred       2225 non-null   float64
+ 9   people_vaccinated_per_hundred        1833 non-null   float64
+ 10  people_fully_vaccinated_per_hundred  1186 non-null   float64
+ 11  daily_vaccinations_per_million       3264 non-null   float64
+ 12  vaccines                             3396 non-null   object 
+ 13  source_name                          3396 non-null   object 
+ 14  source_website                       3396 non-null   object 
+dtypes: float64(9), object(6)
+memory usage: 398.1+ KB
+</code></pre>
+
+<p>Se o objetivo for somente ver como as variáveis do dataframe estão nomeadas podemos chamar <code>df.columns</code> e obter essa informação.</p>
+
+<pre><code class="python">df.columns # colunas no df 
+</code></pre>
+
+<pre><code>Index(['country', 'iso_code', 'date', 'total_vaccinations',
+       'people_vaccinated', 'people_fully_vaccinated',
+       'daily_vaccinations_raw', 'daily_vaccinations',
+       'total_vaccinations_per_hundred', 'people_vaccinated_per_hundred',
+       'people_fully_vaccinated_per_hundred', 'daily_vaccinations_per_million',
+       'vaccines', 'source_name', 'source_website'],
+      dtype='object')
+</code></pre>
+
+<p>Quando queremos acessar a base as observações da base de dados uma a uma em uma lista podemos utilizar chamar <code>df.values</code> e obtemos uma lista com cada uma das observações separadas.</p>
+
+<pre><code class="python">df.values # mostra todas as observações 
+</code></pre>
+
+<pre><code>array([['Albania', 'ALB', '2021-01-10', ..., 'Pfizer/BioNTech',
+        'Ministry of Health',
+        'https://shendetesia.gov.al/vaksinimi-anticovid-kryhen-424-vaksinime-ne-dy-qendrat-e-vaksinimit-ne-shkoder-dhe-tirane/'],
+       ['Albania', 'ALB', '2021-01-11', ..., 'Pfizer/BioNTech',
+        'Ministry of Health',
+        'https://shendetesia.gov.al/vaksinimi-anticovid-kryhen-424-vaksinime-ne-dy-qendrat-e-vaksinimit-ne-shkoder-dhe-tirane/'],
+       ['Albania', 'ALB', '2021-01-12', ..., 'Pfizer/BioNTech',
+        'Ministry of Health',
+        'https://shendetesia.gov.al/vaksinimi-anticovid-kryhen-424-vaksinime-ne-dy-qendrat-e-vaksinimit-ne-shkoder-dhe-tirane/'],
+       ...,
+       ['Wales', nan, '2021-02-14', ...,
+        'Oxford/AstraZeneca, Pfizer/BioNTech',
+        'Government of the United Kingdom',
+        'https://coronavirus.data.gov.uk/details/healthcare'],
+       ['Wales', nan, '2021-02-15', ...,
+        'Oxford/AstraZeneca, Pfizer/BioNTech',
+        'Government of the United Kingdom',
+        'https://coronavirus.data.gov.uk/details/healthcare'],
+       ['Wales', nan, '2021-02-16', ...,
+        'Oxford/AstraZeneca, Pfizer/BioNTech',
+        'Government of the United Kingdom',
+        'https://coronavirus.data.gov.uk/details/healthcare']],
+      dtype=object)
+</code></pre>
+
+<p>A função <code>loc</code> é bastante útil se quisermos ter uma saída mais organizada de uma informação específica como podemos ver abaixo.</p>
+
+<pre><code class="python">df.loc[1] # um jeito mais organizado de ver uma observação 
+</code></pre>
+
+<pre><code>country                                                                          Albania
+iso_code                                                                             ALB
+date                                                                          2021-01-11
+total_vaccinations                                                                   NaN
+people_vaccinated                                                                    NaN
+people_fully_vaccinated                                                              NaN
+daily_vaccinations_raw                                                               NaN
+daily_vaccinations                                                                    64
+total_vaccinations_per_hundred                                                       NaN
+people_vaccinated_per_hundred                                                        NaN
+people_fully_vaccinated_per_hundred                                                  NaN
+daily_vaccinations_per_million                                                        22
+vaccines                                                                 Pfizer/BioNTech
+source_name                                                           Ministry of Health
+source_website                         https://shendetesia.gov.al/vaksinimi-anticovid...
+Name: 1, dtype: object
+</code></pre>
+
+<pre><code class="python">df.loc[[1,2,3]] # pra mais de uma observação 
+</code></pre>
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>country</th>
+      <th>iso_code</th>
+      <th>date</th>
+      <th>total_vaccinations</th>
+      <th>people_vaccinated</th>
+      <th>people_fully_vaccinated</th>
+      <th>daily_vaccinations_raw</th>
+      <th>daily_vaccinations</th>
+      <th>total_vaccinations_per_hundred</th>
+      <th>people_vaccinated_per_hundred</th>
+      <th>people_fully_vaccinated_per_hundred</th>
+      <th>daily_vaccinations_per_million</th>
+      <th>vaccines</th>
+      <th>source_name</th>
+      <th>source_website</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Albania</td>
+      <td>ALB</td>
+      <td>2021-01-11</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>64.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>22.0</td>
+      <td>Pfizer/BioNTech</td>
+      <td>Ministry of Health</td>
+      <td>https://shendetesia.gov.al/vaksinimi-anticovid…</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Albania</td>
+      <td>ALB</td>
+      <td>2021-01-12</td>
+      <td>128.0</td>
+      <td>128.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>64.0</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>NaN</td>
+      <td>22.0</td>
+      <td>Pfizer/BioNTech</td>
+      <td>Ministry of Health</td>
+      <td>https://shendetesia.gov.al/vaksinimi-anticovid…</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Albania</td>
+      <td>ALB</td>
+      <td>2021-01-13</td>
+      <td>188.0</td>
+      <td>188.0</td>
+      <td>NaN</td>
+      <td>60.0</td>
+      <td>63.0</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>NaN</td>
+      <td>22.0</td>
+      <td>Pfizer/BioNTech</td>
+      <td>Ministry of Health</td>
+      <td>https://shendetesia.gov.al/vaksinimi-anticovid…</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<pre><code class="python">df.loc[[1,2,3],["country", "daily_vaccinations"]] # selecionando as observações e também as variáveis 
+</code></pre>
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>country</th>
+      <th>daily_vaccinations</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Albania</td>
+      <td>64.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Albania</td>
+      <td>64.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Albania</td>
+      <td>63.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<pre><code class="python">df.loc[1:3]
+</code></pre>
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>country</th>
+      <th>iso_code</th>
+      <th>date</th>
+      <th>total_vaccinations</th>
+      <th>people_vaccinated</th>
+      <th>people_fully_vaccinated</th>
+      <th>daily_vaccinations_raw</th>
+      <th>daily_vaccinations</th>
+      <th>total_vaccinations_per_hundred</th>
+      <th>people_vaccinated_per_hundred</th>
+      <th>people_fully_vaccinated_per_hundred</th>
+      <th>daily_vaccinations_per_million</th>
+      <th>vaccines</th>
+      <th>source_name</th>
+      <th>source_website</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Albania</td>
+      <td>ALB</td>
+      <td>2021-01-11</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>64.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>22.0</td>
+      <td>Pfizer/BioNTech</td>
+      <td>Ministry of Health</td>
+      <td>https://shendetesia.gov.al/vaksinimi-anticovid…</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Albania</td>
+      <td>ALB</td>
+      <td>2021-01-12</td>
+      <td>128.0</td>
+      <td>128.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>64.0</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>NaN</td>
+      <td>22.0</td>
+      <td>Pfizer/BioNTech</td>
+      <td>Ministry of Health</td>
+      <td>https://shendetesia.gov.al/vaksinimi-anticovid…</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Albania</td>
+      <td>ALB</td>
+      <td>2021-01-13</td>
+      <td>188.0</td>
+      <td>188.0</td>
+      <td>NaN</td>
+      <td>60.0</td>
+      <td>63.0</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>NaN</td>
+      <td>22.0</td>
+      <td>Pfizer/BioNTech</td>
+      <td>Ministry of Health</td>
+      <td>https://shendetesia.gov.al/vaksinimi-anticovid…</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<pre><code class="python">df.loc[1:5:2] # selecionando observações 2 a 2 
+</code></pre>
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>country</th>
+      <th>iso_code</th>
+      <th>date</th>
+      <th>total_vaccinations</th>
+      <th>people_vaccinated</th>
+      <th>people_fully_vaccinated</th>
+      <th>daily_vaccinations_raw</th>
+      <th>daily_vaccinations</th>
+      <th>total_vaccinations_per_hundred</th>
+      <th>people_vaccinated_per_hundred</th>
+      <th>people_fully_vaccinated_per_hundred</th>
+      <th>daily_vaccinations_per_million</th>
+      <th>vaccines</th>
+      <th>source_name</th>
+      <th>source_website</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Albania</td>
+      <td>ALB</td>
+      <td>2021-01-11</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>64.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>22.0</td>
+      <td>Pfizer/BioNTech</td>
+      <td>Ministry of Health</td>
+      <td>https://shendetesia.gov.al/vaksinimi-anticovid…</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Albania</td>
+      <td>ALB</td>
+      <td>2021-01-13</td>
+      <td>188.0</td>
+      <td>188.0</td>
+      <td>NaN</td>
+      <td>60.0</td>
+      <td>63.0</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>NaN</td>
+      <td>22.0</td>
+      <td>Pfizer/BioNTech</td>
+      <td>Ministry of Health</td>
+      <td>https://shendetesia.gov.al/vaksinimi-anticovid…</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Albania</td>
+      <td>ALB</td>
+      <td>2021-01-15</td>
+      <td>308.0</td>
+      <td>308.0</td>
+      <td>NaN</td>
+      <td>42.0</td>
+      <td>62.0</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>NaN</td>
+      <td>22.0</td>
+      <td>Pfizer/BioNTech</td>
+      <td>Ministry of Health</td>
+      <td>https://shendetesia.gov.al/vaksinimi-anticovid…</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>Para filtramos a base de dados podemos utilizar a função <code>query</code> em que o argumento recebido por ela será uma condição de alguma das variáveis existentes no dataframe.</p>
+
+<pre><code class="python">df.query('total_vaccinations &gt;= 1000'). head() # filtra os dados 
+</code></pre>
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>country</th>
+      <th>iso_code</th>
+      <th>date</th>
+      <th>total_vaccinations</th>
+      <th>people_vaccinated</th>
+      <th>people_fully_vaccinated</th>
+      <th>daily_vaccinations_raw</th>
+      <th>daily_vaccinations</th>
+      <th>total_vaccinations_per_hundred</th>
+      <th>people_vaccinated_per_hundred</th>
+      <th>people_fully_vaccinated_per_hundred</th>
+      <th>daily_vaccinations_per_million</th>
+      <th>vaccines</th>
+      <th>source_name</th>
+      <th>source_website</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>30</th>
+      <td>Albania</td>
+      <td>ALB</td>
+      <td>2021-02-09</td>
+      <td>1127.0</td>
+      <td>689.0</td>
+      <td>438.0</td>
+      <td>NaN</td>
+      <td>82.0</td>
+      <td>0.04</td>
+      <td>0.02</td>
+      <td>0.02</td>
+      <td>28.0</td>
+      <td>Pfizer/BioNTech</td>
+      <td>Ministry of Health</td>
+      <td>https://shendetesia.gov.al/vaksinimi-anticovid…</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>Albania</td>
+      <td>ALB</td>
+      <td>2021-02-17</td>
+      <td>1701.0</td>
+      <td>1090.0</td>
+      <td>611.0</td>
+      <td>NaN</td>
+      <td>72.0</td>
+      <td>0.06</td>
+      <td>0.04</td>
+      <td>0.02</td>
+      <td>25.0</td>
+      <td>Pfizer/BioNTech</td>
+      <td>Ministry of Health</td>
+      <td>https://shendetesia.gov.al/vaksinimi-anticovid…</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>Andorra</td>
+      <td>AND</td>
+      <td>2021-02-01</td>
+      <td>1036.0</td>
+      <td>1036.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>66.0</td>
+      <td>1.34</td>
+      <td>1.34</td>
+      <td>NaN</td>
+      <td>854.0</td>
+      <td>Pfizer/BioNTech</td>
+      <td>Government of Andorra</td>
+      <td>https://www.govern.ad/comunicats/item/12423-el…</td>
+    </tr>
+    <tr>
+      <th>57</th>
+      <td>Andorra</td>
+      <td>AND</td>
+      <td>2021-02-10</td>
+      <td>1291.0</td>
+      <td>1291.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>28.0</td>
+      <td>1.67</td>
+      <td>1.67</td>
+      <td>NaN</td>
+      <td>362.0</td>
+      <td>Pfizer/BioNTech</td>
+      <td>Government of Andorra</td>
+      <td>https://www.govern.ad/comunicats/item/12423-el…</td>
+    </tr>
+    <tr>
+      <th>59</th>
+      <td>Andorra</td>
+      <td>AND</td>
+      <td>2021-02-12</td>
+      <td>1622.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>68.0</td>
+      <td>2.10</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>880.0</td>
+      <td>Pfizer/BioNTech</td>
+      <td>Government of Andorra</td>
+      <td>https://www.govern.ad/comunicats/item/12423-el…</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<pre><code class="python">df.query('total_vaccinations &gt;= 100000') # filtra os dados 
+</code></pre>
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>country</th>
+      <th>iso_code</th>
+      <th>date</th>
+      <th>total_vaccinations</th>
+      <th>people_vaccinated</th>
+      <th>people_fully_vaccinated</th>
+      <th>daily_vaccinations_raw</th>
+      <th>daily_vaccinations</th>
+      <th>total_vaccinations_per_hundred</th>
+      <th>people_vaccinated_per_hundred</th>
+      <th>people_fully_vaccinated_per_hundred</th>
+      <th>daily_vaccinations_per_million</th>
+      <th>vaccines</th>
+      <th>source_name</th>
+      <th>source_website</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>80</th>
+      <td>Argentina</td>
+      <td>ARG</td>
+      <td>2021-01-08</td>
+      <td>107542.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>10519.0</td>
+      <td>0.24</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>233.0</td>
+      <td>Sputnik V</td>
+      <td>Ministry of Health</td>
+      <td>http://datos.salud.gob.ar/dataset/vacunas-cont…</td>
+    </tr>
+    <tr>
+      <th>85</th>
+      <td>Argentina</td>
+      <td>ARG</td>
+      <td>2021-01-13</td>
+      <td>166833.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>13323.0</td>
+      <td>0.37</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>295.0</td>
+      <td>Sputnik V</td>
+      <td>Ministry of Health</td>
+      <td>http://datos.salud.gob.ar/dataset/vacunas-cont…</td>
+    </tr>
+    <tr>
+      <th>87</th>
+      <td>Argentina</td>
+      <td>ARG</td>
+      <td>2021-01-15</td>
+      <td>200759.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>13317.0</td>
+      <td>0.44</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>295.0</td>
+      <td>Sputnik V</td>
+      <td>Ministry of Health</td>
+      <td>http://datos.salud.gob.ar/dataset/vacunas-cont…</td>
+    </tr>
+    <tr>
+      <th>92</th>
+      <td>Argentina</td>
+      <td>ARG</td>
+      <td>2021-01-20</td>
+      <td>247933.0</td>
+      <td>243539.0</td>
+      <td>4394.0</td>
+      <td>NaN</td>
+      <td>11586.0</td>
+      <td>0.55</td>
+      <td>0.54</td>
+      <td>0.01</td>
+      <td>256.0</td>
+      <td>Sputnik V</td>
+      <td>Ministry of Health</td>
+      <td>http://datos.salud.gob.ar/dataset/vacunas-cont…</td>
+    </tr>
+    <tr>
+      <th>93</th>
+      <td>Argentina</td>
+      <td>ARG</td>
+      <td>2021-01-21</td>
+      <td>265724.0</td>
+      <td>249372.0</td>
+      <td>16352.0</td>
+      <td>17791.0</td>
+      <td>11704.0</td>
+      <td>0.59</td>
+      <td>0.55</td>
+      <td>0.04</td>
+      <td>259.0</td>
+      <td>Sputnik V</td>
+      <td>Ministry of Health</td>
+      <td>http://datos.salud.gob.ar/dataset/vacunas-cont…</td>
+    </tr>
+    <tr>
+      <th>…</th>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+    </tr>
+    <tr>
+      <th>3391</th>
+      <td>Wales</td>
+      <td>NaN</td>
+      <td>2021-02-12</td>
+      <td>753669.0</td>
+      <td>749445.0</td>
+      <td>4224.0</td>
+      <td>33715.0</td>
+      <td>27743.0</td>
+      <td>23.90</td>
+      <td>23.77</td>
+      <td>0.13</td>
+      <td>8799.0</td>
+      <td>Oxford/AstraZeneca, Pfizer/BioNTech</td>
+      <td>Government of the United Kingdom</td>
+      <td>https://coronavirus.data.gov.uk/details/health…</td>
+    </tr>
+    <tr>
+      <th>3392</th>
+      <td>Wales</td>
+      <td>NaN</td>
+      <td>2021-02-13</td>
+      <td>776224.0</td>
+      <td>771651.0</td>
+      <td>4573.0</td>
+      <td>22555.0</td>
+      <td>26285.0</td>
+      <td>24.62</td>
+      <td>24.47</td>
+      <td>0.15</td>
+      <td>8337.0</td>
+      <td>Oxford/AstraZeneca, Pfizer/BioNTech</td>
+      <td>Government of the United Kingdom</td>
+      <td>https://coronavirus.data.gov.uk/details/health…</td>
+    </tr>
+    <tr>
+      <th>3393</th>
+      <td>Wales</td>
+      <td>NaN</td>
+      <td>2021-02-14</td>
+      <td>790211.0</td>
+      <td>784809.0</td>
+      <td>5402.0</td>
+      <td>13987.0</td>
+      <td>26206.0</td>
+      <td>25.06</td>
+      <td>24.89</td>
+      <td>0.17</td>
+      <td>8312.0</td>
+      <td>Oxford/AstraZeneca, Pfizer/BioNTech</td>
+      <td>Government of the United Kingdom</td>
+      <td>https://coronavirus.data.gov.uk/details/health…</td>
+    </tr>
+    <tr>
+      <th>3394</th>
+      <td>Wales</td>
+      <td>NaN</td>
+      <td>2021-02-15</td>
+      <td>803178.0</td>
+      <td>795927.0</td>
+      <td>7251.0</td>
+      <td>12967.0</td>
+      <td>24418.0</td>
+      <td>25.47</td>
+      <td>25.24</td>
+      <td>0.23</td>
+      <td>7745.0</td>
+      <td>Oxford/AstraZeneca, Pfizer/BioNTech</td>
+      <td>Government of the United Kingdom</td>
+      <td>https://coronavirus.data.gov.uk/details/health…</td>
+    </tr>
+    <tr>
+      <th>3395</th>
+      <td>Wales</td>
+      <td>NaN</td>
+      <td>2021-02-16</td>
+      <td>820339.0</td>
+      <td>807351.0</td>
+      <td>12988.0</td>
+      <td>17161.0</td>
+      <td>23033.0</td>
+      <td>26.02</td>
+      <td>25.61</td>
+      <td>0.41</td>
+      <td>7305.0</td>
+      <td>Oxford/AstraZeneca, Pfizer/BioNTech</td>
+      <td>Government of the United Kingdom</td>
+      <td>https://coronavirus.data.gov.uk/details/health…</td>
+    </tr>
+  </tbody>
+</table>
+<p>1305 rows × 15 columns</p>
+</div>
+
+<p>Outra funçao interessante é a <code>select_dtypes</code> em que podemos utilizá-la para fazermos uma seleção de variáveis de um único tipo de classe.</p>
+
+<pre><code class="python">df.select_dtypes(include='object') # seleciona uma classe específica das variáveis do df 
+</code></pre>
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>country</th>
+      <th>iso_code</th>
+      <th>date</th>
+      <th>vaccines</th>
+      <th>source_name</th>
+      <th>source_website</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Albania</td>
+      <td>ALB</td>
+      <td>2021-01-10</td>
+      <td>Pfizer/BioNTech</td>
+      <td>Ministry of Health</td>
+      <td>https://shendetesia.gov.al/vaksinimi-anticovid…</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Albania</td>
+      <td>ALB</td>
+      <td>2021-01-11</td>
+      <td>Pfizer/BioNTech</td>
+      <td>Ministry of Health</td>
+      <td>https://shendetesia.gov.al/vaksinimi-anticovid…</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Albania</td>
+      <td>ALB</td>
+      <td>2021-01-12</td>
+      <td>Pfizer/BioNTech</td>
+      <td>Ministry of Health</td>
+      <td>https://shendetesia.gov.al/vaksinimi-anticovid…</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Albania</td>
+      <td>ALB</td>
+      <td>2021-01-13</td>
+      <td>Pfizer/BioNTech</td>
+      <td>Ministry of Health</td>
+      <td>https://shendetesia.gov.al/vaksinimi-anticovid…</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Albania</td>
+      <td>ALB</td>
+      <td>2021-01-14</td>
+      <td>Pfizer/BioNTech</td>
+      <td>Ministry of Health</td>
+      <td>https://shendetesia.gov.al/vaksinimi-anticovid…</td>
+    </tr>
+    <tr>
+      <th>…</th>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+    </tr>
+    <tr>
+      <th>3391</th>
+      <td>Wales</td>
+      <td>NaN</td>
+      <td>2021-02-12</td>
+      <td>Oxford/AstraZeneca, Pfizer/BioNTech</td>
+      <td>Government of the United Kingdom</td>
+      <td>https://coronavirus.data.gov.uk/details/health…</td>
+    </tr>
+    <tr>
+      <th>3392</th>
+      <td>Wales</td>
+      <td>NaN</td>
+      <td>2021-02-13</td>
+      <td>Oxford/AstraZeneca, Pfizer/BioNTech</td>
+      <td>Government of the United Kingdom</td>
+      <td>https://coronavirus.data.gov.uk/details/health…</td>
+    </tr>
+    <tr>
+      <th>3393</th>
+      <td>Wales</td>
+      <td>NaN</td>
+      <td>2021-02-14</td>
+      <td>Oxford/AstraZeneca, Pfizer/BioNTech</td>
+      <td>Government of the United Kingdom</td>
+      <td>https://coronavirus.data.gov.uk/details/health…</td>
+    </tr>
+    <tr>
+      <th>3394</th>
+      <td>Wales</td>
+      <td>NaN</td>
+      <td>2021-02-15</td>
+      <td>Oxford/AstraZeneca, Pfizer/BioNTech</td>
+      <td>Government of the United Kingdom</td>
+      <td>https://coronavirus.data.gov.uk/details/health…</td>
+    </tr>
+    <tr>
+      <th>3395</th>
+      <td>Wales</td>
+      <td>NaN</td>
+      <td>2021-02-16</td>
+      <td>Oxford/AstraZeneca, Pfizer/BioNTech</td>
+      <td>Government of the United Kingdom</td>
+      <td>https://coronavirus.data.gov.uk/details/health…</td>
+    </tr>
+  </tbody>
+</table>
+<p>3396 rows × 6 columns</p>
+</div>
+
+<pre><code class="python">df.select_dtypes(include='float') # seleciona uma classe específica das variáveis do df 
+</code></pre>
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>total_vaccinations</th>
+      <th>people_vaccinated</th>
+      <th>people_fully_vaccinated</th>
+      <th>daily_vaccinations_raw</th>
+      <th>daily_vaccinations</th>
+      <th>total_vaccinations_per_hundred</th>
+      <th>people_vaccinated_per_hundred</th>
+      <th>people_fully_vaccinated_per_hundred</th>
+      <th>daily_vaccinations_per_million</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>64.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>22.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>128.0</td>
+      <td>128.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>64.0</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>NaN</td>
+      <td>22.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>188.0</td>
+      <td>188.0</td>
+      <td>NaN</td>
+      <td>60.0</td>
+      <td>63.0</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>NaN</td>
+      <td>22.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>266.0</td>
+      <td>266.0</td>
+      <td>NaN</td>
+      <td>78.0</td>
+      <td>66.0</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>NaN</td>
+      <td>23.0</td>
+    </tr>
+    <tr>
+      <th>…</th>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+    </tr>
+    <tr>
+      <th>3391</th>
+      <td>753669.0</td>
+      <td>749445.0</td>
+      <td>4224.0</td>
+      <td>33715.0</td>
+      <td>27743.0</td>
+      <td>23.90</td>
+      <td>23.77</td>
+      <td>0.13</td>
+      <td>8799.0</td>
+    </tr>
+    <tr>
+      <th>3392</th>
+      <td>776224.0</td>
+      <td>771651.0</td>
+      <td>4573.0</td>
+      <td>22555.0</td>
+      <td>26285.0</td>
+      <td>24.62</td>
+      <td>24.47</td>
+      <td>0.15</td>
+      <td>8337.0</td>
+    </tr>
+    <tr>
+      <th>3393</th>
+      <td>790211.0</td>
+      <td>784809.0</td>
+      <td>5402.0</td>
+      <td>13987.0</td>
+      <td>26206.0</td>
+      <td>25.06</td>
+      <td>24.89</td>
+      <td>0.17</td>
+      <td>8312.0</td>
+    </tr>
+    <tr>
+      <th>3394</th>
+      <td>803178.0</td>
+      <td>795927.0</td>
+      <td>7251.0</td>
+      <td>12967.0</td>
+      <td>24418.0</td>
+      <td>25.47</td>
+      <td>25.24</td>
+      <td>0.23</td>
+      <td>7745.0</td>
+    </tr>
+    <tr>
+      <th>3395</th>
+      <td>820339.0</td>
+      <td>807351.0</td>
+      <td>12988.0</td>
+      <td>17161.0</td>
+      <td>23033.0</td>
+      <td>26.02</td>
+      <td>25.61</td>
+      <td>0.41</td>
+      <td>7305.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>3396 rows × 9 columns</p>
+</div>
+
+<p>Uma das funções que considero mais importantes de saber utilizar na análise de dados é o <code>groupby</code> e abaixo podemos ver como é fácil a sua utilização no <code>python</code>.</p>
+
+<pre><code class="python">df.groupby(by='country').size() # agrupamento 
+</code></pre>
+
+<pre><code>country
+Albania                     39
+Algeria                      2
+Andorra                     19
+Anguilla                    10
+Argentina                   51
+                            ..
+Turks and Caicos Islands    30
+United Arab Emirates        44
+United Kingdom              66
+United States               60
+Wales                       66
+Length: 94, dtype: int64
+</code></pre>
+
+<pre><code class="python">df.groupby(by='country')['total_vaccinations_per_hundred'].mean() # agrupamento com seleção de "coluna resposta"
+</code></pre>
+
+<pre><code>country
+Albania                      0.017857
+Algeria                      0.000000
+Andorra                      1.465000
+Anguilla                     4.470000
+Argentina                    0.818750
+                              ...    
+Turks and Caicos Islands     8.310000
+United Arab Emirates        29.550488
+United Kingdom              12.176429
+United States                7.026304
+Wales                       11.999250
+Name: total_vaccinations_per_hundred, Length: 94, dtype: float64
+</code></pre>
+
+<p>Contrário ao que vemos com a função <code>info</code> que nos retorna os dados válidos, abaixo podemos ver como saber a quantidade de dados <em>nulos</em> em nosso dataframe.</p>
+
+<pre><code class="python">df.isnull().sum() # mostra a quantidade de valores ausentes por variável 
+</code></pre>
+
+<pre><code>country                                   0
+iso_code                                264
+date                                      0
+total_vaccinations                     1171
+people_vaccinated                      1563
+people_fully_vaccinated                2210
+daily_vaccinations_raw                 1535
+daily_vaccinations                      132
+total_vaccinations_per_hundred         1171
+people_vaccinated_per_hundred          1563
+people_fully_vaccinated_per_hundred    2210
+daily_vaccinations_per_million          132
+vaccines                                  0
+source_name                               0
+source_website                            0
+dtype: int64
+</code></pre>
+
+<p>Por fim, abaixo podemos ver a utilização das funções <code>upper</code> e <code>lower</code> que transforma todos os caracters de uma string para maiúsculo e tranforma todos os caracters de uma string para minúsculo, respectivamente. </p>
+
+<pre><code class="python">df.country.str.upper().head()
+</code></pre>
+
+<pre><code>0    ALBANIA
+1    ALBANIA
+2    ALBANIA
+3    ALBANIA
+4    ALBANIA
+Name: country, dtype: object
+</code></pre>
+
+<pre><code class="python">df.country.str.lower().head()
+</code></pre>
+
+<pre><code>0    albania
+1    albania
+2    albania
+3    albania
+4    albania
+Name: country, dtype: object
+</code></pre>
+
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

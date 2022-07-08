@@ -1,0 +1,11 @@
+---
+title: "Explorando o pacote pandas"
+author: "Lucas Lacerda Oliveira"
+date: "2022-07-07"
+categories: [phyton, pandas]
+---
+
+```{r echo=FALSE}
+shiny::includeMarkdown("Pandas as pd.md")
+
+```
