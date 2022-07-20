@@ -1,0 +1,11 @@
+{
+  "hash": "1b205b1a646813a66cd4e665f4a80fd3",
+  "result": {
+    "markdown": "---\ntitle: \"Desafio 1\"\nauthor: \"Lucas Lacerda Oliveira\"\ndate: \"2022-07-07\"\ncategories: [phyton, re]\n---\n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\n# Defina uma única ER para realizar a busca dos seguintes\n# endereços web:\n\nimport re\nimport pprint\n\ntexto = '''\nhttps://www.ufes.br\nhttp://www.eltiempo.com.co\nhttps://www.udemy.com/course/python-3-analisis-y-visualizacion-de-datos/learn/lecture/23476246#overview\nhttp://analytics.br\nhttps://campus.datacamp.com/courses/introduction-to-git/basic-workflow?ex=12\nhttps://ffajardo64.github.io/statistical_learning/\n'''\n\npadrao = re.compile(r'[https?]+://[\\w]+\\.[a-z?]+[/._?\\-\\#\\=\\w]+')\nbusca = padrao.findall(texto)\n\nfor i in busca:\n    print(i)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\nhttps://www.ufes.br\nhttp://www.eltiempo.com.co\nhttps://www.udemy.com/course/python-3-analisis-y-visualizacion-de-datos/learn/lecture/23476246#overview\nhttp://analytics.br\nhttps://campus.datacamp.com/courses/introduction-to-git/basic-workflow?ex=12\nhttps://ffajardo64.github.io/statistical_learning/\n```\n:::\n:::\n\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

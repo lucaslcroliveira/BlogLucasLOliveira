@@ -2,7 +2,7 @@
 title: "Explorando o pacote pandas"
 author: "Lucas Lacerda Oliveira"
 date: "2022-07-07"
-categories: [phyton, pandas]
+categories: [phyton, pandas] 
 ---
 
 ## Introdução
@@ -84,10 +84,9 @@ Contrário ao que vemos com a função `info` que nos retorna os dados válidos,
 df.isnull().sum() # mostra a quantidade de valores ausentes por variável 
 ```
 
-Por fim, abaixo podemos ver a utilização das funções `upper` e `lower` que transforma todos os caracters de uma string para maiúsculo e tranforma todos os caracters de uma string para minúsculo, respectivamente. 
+Por fim, abaixo podemos ver a utilização das funções `upper` e `lower` que transforma todos os caracters de uma string para maiúsculo e tranforma todos os caracters de uma string para minúsculo, respectivamente.
 
 ```{python}
 df.country.str.upper().head()
 df.country.str.lower().head()
 ```
-

@@ -1,0 +1,11 @@
+{
+  "hash": "3ba7f6b50fe58924984f3d69d6cd7372",
+  "result": {
+    "markdown": "---\ntitle: \"Desafio 2\"\nauthor: \"Lucas Lacerda Oliveira\"\ndate: \"2022-07-07\"\ncategories: [phyton, re]\n---\n\n## Desafio 2\n\nOs correios precisam melhorar o sistema de entrega das correspondências e para isso contrataram você. Um arquivo com diversas informações foi disponibilizado com: Nomes, datas de nascimento, endereços, CEP's e o nome da cidade. As informações devem seguir o seguinte formato:\n\nJoão Carlos da Silva dos Santos Júnior\\|14/05/1987\\|Rua Carijós de Macedo\\|50\\|22222-222\\|Rio de Janeiro\n\nRomulo Henrique\\|14/06/1973\\|Rua do Lins\\|120\\|12345-322\\|Recife\n\nLeonardo Cordeiro dos Santos\\|01/01/1995\\|Rua de Campo Grande\\|01\\|00001-234\\|São Paulo\n\nSolicita-se uma ER que realize esse trabalho e ajude os correios!\n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\nimport re\n\ntexto = '''\nJoão Carlos da Silva dos Santos Júnior|14/05/1987|Rua Carijós de Macedo|50|22222-222|Rio de Janeiro\nRomulo Henrique|14/06/1973|Rua do Lins|120|12345-322|Recife\nLeonardo Cordeiro dos Santos|01/01/1995|Rua de Campo Grande|01|00001-234|São Paulo\n'''\n\npadrao = re.compile(r'[a-zA-Z\\száàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+\\|[0-9/]+\\|[\\w\\-\\száàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+\\|[0-9]+\\|[0-9\\-]+\\|[a-zA-Z\\száàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+')\nbusca = padrao.findall(texto)\n\nfor i in busca:\n    print(i)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n\nJoão Carlos da Silva dos Santos Júnior|14/05/1987|Rua Carijós de Macedo|50|22222-222|Rio de Janeiro\nRomulo Henrique\nRecife\nLeonardo Cordeiro dos Santos|01/01/1995|Rua de Campo Grande|01|00001-234|São Paulo\n\n```\n:::\n:::\n\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

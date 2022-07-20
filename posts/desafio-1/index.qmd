@@ -27,4 +27,3 @@ busca = padrao.findall(texto)
 for i in busca:
     print(i)
 ```
-

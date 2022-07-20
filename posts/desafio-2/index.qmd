@@ -7,13 +7,13 @@ categories: [phyton, re]
 
 ## Desafio 2
 
-Os correios precisam melhorar o sistema de entrega das correspondências e para isso contrataram você. Um arquivo com diversas informações foi disponibilizado com: Nomes, datas de nascimento, endereços, CEP’s e o nome da cidade. As informações devem seguir o seguinte formato:
+Os correios precisam melhorar o sistema de entrega das correspondências e para isso contrataram você. Um arquivo com diversas informações foi disponibilizado com: Nomes, datas de nascimento, endereços, CEP's e o nome da cidade. As informações devem seguir o seguinte formato:
 
-João Carlos da Silva dos Santos Júnior|14/05/1987|Rua Carijós de Macedo|50|22222-222|Rio de Janeiro
+João Carlos da Silva dos Santos Júnior\|14/05/1987\|Rua Carijós de Macedo\|50\|22222-222\|Rio de Janeiro
 
-Romulo Henrique|14/06/1973|Rua do Lins|120|12345-322|Recife
+Romulo Henrique\|14/06/1973\|Rua do Lins\|120\|12345-322\|Recife
 
-Leonardo Cordeiro dos Santos|01/01/1995|Rua de Campo Grande|01|00001-234|São Paulo
+Leonardo Cordeiro dos Santos\|01/01/1995\|Rua de Campo Grande\|01\|00001-234\|São Paulo
 
 Solicita-se uma ER que realize esse trabalho e ajude os correios!
 
