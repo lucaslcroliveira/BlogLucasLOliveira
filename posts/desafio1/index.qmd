@@ -5,6 +5,26 @@ date: "2022-07-07"
 categories: [phyton, re]
 ---
 
-```{r echo=FALSE}
-shiny::includeMarkdown("C:/Users/Lucas/Desktop/arquivos_md/Desafio1.md")
+```{python}
+# Defina uma única ER para realizar a busca dos seguintes
+# endereços web:
+
+import re
+import pprint
+
+texto = '''
+https://www.ufes.br
+http://www.eltiempo.com.co
+https://www.udemy.com/course/python-3-analisis-y-visualizacion-de-datos/learn/lecture/23476246#overview
+http://analytics.br
+https://campus.datacamp.com/courses/introduction-to-git/basic-workflow?ex=12
+https://ffajardo64.github.io/statistical_learning/
+'''
+
+padrao = re.compile(r'[https?]+://[\w]+\.[a-z?]+[/._?\-\#\=\w]+')
+busca = padrao.findall(texto)
+
+for i in busca:
+    print(i)
 ```
+

@@ -5,6 +5,34 @@ date: "2022-07-07"
 categories: [phyton, BeautifulSoup]
 ---
 
-```{r echo=FALSE}
-shiny::includeMarkdown("C:/Users/Lucas/Desktop/arquivos_md/Desafio3.md")
+```{python}
+from bs4 import BeautifulSoup
+import requests
+import pandas as pd
+
+url = requests.get('https://pt.wikipedia.org/wiki/Lista_de_munic%C3%ADpios_do_Esp%C3%ADrito_Santo_por_popula%C3%A7%C3%A3o')
+print(url.status_code)
+
+html = BeautifulSoup(url.content, 'html.parser')
+tabela = html.find('table')
+titulos = [i.text for i in tabela.find_all('th')]
+print(titulos)
+titulos[2] = 'População'
+print(titulos)
+df = pd.DataFrame(columns = titulos)
+df
+for j in tabela.find_all('tr')[1:79]:
+    row_data = j.find_all('td')
+    row = [i.text for i in row_data]
+    length = len(df)
+    df.loc[length] = row
+df
+populacao = df['População']
+len(populacao)
+populacao = [i.split('\n')[0].split(' [')[0].replace(' ', '.').replace('\xa0', '.') for i in populacao]
+populacao = [float(i) for i in populacao]
+populacao
+df['População'] = populacao
+df
 ```
+

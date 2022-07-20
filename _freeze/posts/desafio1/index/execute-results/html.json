@@ -1,14 +1,11 @@
 {
-  "hash": "5f56da8e10c9abadf9064b1ebc761862",
+  "hash": "d483a7217b200f3c2d6a94406a58d998",
   "result": {
-    "markdown": "---\ntitle: \"Desafio 1\"\nauthor: \"Lucas Lacerda Oliveira\"\ndate: \"2022-07-07\"\ncategories: [phyton, re]\n---\n\n::: {.cell}\n::: {.cell-output-display}\n```{=html}\n<pre><code class=\"python\"># Defina uma única ER para realizar a busca dos seguintes\n# endereços web:\n\nimport re\nimport pprint\n</code></pre>\n\n<pre><code class=\"python\">texto = &#39;&#39;&#39;\nhttps://www.ufes.br\nhttp://www.eltiempo.com.co\nhttps://www.udemy.com/course/python-3-analisis-y-visualizacion-de-datos/learn/lecture/23476246#overview\nhttp://analytics.br\nhttps://campus.datacamp.com/courses/introduction-to-git/basic-workflow?ex=12\nhttps://ffajardo64.github.io/statistical_learning/\n&#39;&#39;&#39;\n</code></pre>\n\n<pre><code class=\"python\">padrao = re.compile(r&#39;[https?]+://[\\w]+\\.[a-z?]+[/._?\\-\\#\\=\\w]+&#39;)\nbusca = padrao.findall(texto)\n\nfor i in busca:\n    print(i)\n</code></pre>\n\n<pre><code>https://www.ufes.br\nhttp://www.eltiempo.com.co\nhttps://www.udemy.com/course/python-3-analisis-y-visualizacion-de-datos/learn/lecture/23476246#overview\nhttp://analytics.br\nhttps://campus.datacamp.com/courses/introduction-to-git/basic-workflow?ex=12\nhttps://ffajardo64.github.io/statistical_learning/\n</code></pre>\n\n```\n:::\n:::\n",
-    "supporting": [],
-    "filters": [
-      "rmarkdown/pagebreak.lua"
+    "markdown": "---\ntitle: \"Desafio 1\"\nauthor: \"Lucas Lacerda Oliveira\"\ndate: \"2022-07-07\"\ncategories: [phyton, re]\n---\n\n``` {.python .cell-code}\n# shiny::includeMarkdown(\"C:/Users/Lucas/Desktop/arquivos_md/Desafio1.md\")\n```\n\n\n::: {.cell execution_count=2}\n``` {.python .cell-code}\n# Defina uma única ER para realizar a busca dos seguintes\n# endereços web:\n\nimport re\nimport pprint\n\ntexto = '''\nhttps://www.ufes.br\nhttp://www.eltiempo.com.co\nhttps://www.udemy.com/course/python-3-analisis-y-visualizacion-de-datos/learn/lecture/23476246#overview\nhttp://analytics.br\nhttps://campus.datacamp.com/courses/introduction-to-git/basic-workflow?ex=12\nhttps://ffajardo64.github.io/statistical_learning/\n'''\n\npadrao = re.compile(r'[https?]+://[\\w]+\\.[a-z?]+[/._?\\-\\#\\=\\w]+')\nbusca = padrao.findall(texto)\n\nfor i in busca:\n    print(i)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\nhttps://www.ufes.br\nhttp://www.eltiempo.com.co\nhttps://www.udemy.com/course/python-3-analisis-y-visualizacion-de-datos/learn/lecture/23476246#overview\nhttp://analytics.br\nhttps://campus.datacamp.com/courses/introduction-to-git/basic-workflow?ex=12\nhttps://ffajardo64.github.io/statistical_learning/\n```\n:::\n:::\n\n\n",
+    "supporting": [
+      "index_files"
     ],
-    "includes": {},
-    "engineDependencies": {},
-    "preserve": {},
-    "postProcess": true
+    "filters": [],
+    "includes": {}
   }
 }

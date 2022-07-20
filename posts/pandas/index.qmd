@@ -5,6 +5,89 @@ date: "2022-07-07"
 categories: [phyton, pandas]
 ---
 
-```{r echo=FALSE}
-shiny::includeMarkdown("C:/Users/Lucas/Desktop/arquivos_md/Pandas as pd.md")
+## Introdução
+
+O pacote pandas é considerado por muitos o melhor pacote da linguagem de programação python para trabalhar com dataframes. Nesse post iremos explorar melhor o que esse pacote traz de facilidade na hora de analisarmos dados. A base de dados utilizada é disponibilizada pelo kaggle e nela temos informações sobre vacinação em diversos países.
+
+## Desenvolvimento
+
+Começamos importando o pacote pandas e informando como iremos chamar o pacote no decorrer do nosso código (`pd`).
+
+```{python}
+import pandas as pd
 ```
+
+Após importação do pacote iremos fazer importação da base de dados utilizando a função `read_csv` e iremos atribuir a base de dados para o objeto `df`.
+
+```{python}
+df = pd.read_csv("C:/Users/Lucas/Downloads/country_vaccinations.csv")
+```
+
+Para ver se deu tudo certo na importação da base de dados podemos visualizar o começo da nossa base de dados com a função base do python chamada head. Por default vemos as primeiras 4 observações da base, mas podemos alterar o argumento de quantas obserações queremos ter como output.
+
+```{python}
+df.head()
+```
+
+Para obter informações gerais sobre a base de dados podemos utilizar a função `info` que nos retorna as informações sobre o preenchimento e a classe de cada uma das variáveis.
+
+```{python}
+df.info() # informações sobre a base de dados
+```
+
+Se o objetivo for somente ver como as variáveis do dataframe estão nomeadas podemos chamar `df.columns` e obter essa informação.
+
+```{python}
+df.columns # colunas no df 
+```
+
+Quando queremos acessar a base as observações da base de dados uma a uma em uma lista podemos utilizar chamar `df.values` e obtemos uma lista com cada uma das observações separadas.
+
+```{python}
+df.values # mostra todas as observações 
+```
+
+A função `loc` é bastante útil se quisermos ter uma saída mais organizada de uma informação específica como podemos ver abaixo.
+
+```{python}
+df.loc[1] # um jeito mais organizado de ver uma observação 
+df.loc[[1,2,3]] # pra mais de uma observação 
+df.loc[[1,2,3],["country", "daily_vaccinations"]] # selecionando as observações e também as variáveis 
+df.loc[1:3]
+df.loc[1:5:2] # selecionando observações 2 a 2 
+```
+
+Para filtramos a base de dados podemos utilizar a função `query` em que o argumento recebido por ela será uma condição de alguma das variáveis existentes no dataframe.
+
+```{python}
+df.query('total_vaccinations >= 1000'). head() # filtra os dados 
+df.query('total_vaccinations >= 100000') # filtra os dados 
+```
+
+Outra funçao interessante é a `select_dtypes` em que podemos utilizá-la para fazermos uma seleção de variáveis de um único tipo de classe.
+
+```{python}
+df.select_dtypes(include='object') # seleciona uma classe específica das variáveis do df 
+df.select_dtypes(include='float') # seleciona uma classe específica das variáveis do df 
+```
+
+Uma das funções que considero mais importantes de saber utilizar na análise de dados é o `groupby` e abaixo podemos ver como é fácil a sua utilização no `python`.
+
+```{python}
+df.groupby(by='country').size() # agrupamento 
+df.groupby(by='country')['total_vaccinations_per_hundred'].mean() # agrupamento com seleção de "coluna resposta"
+```
+
+Contrário ao que vemos com a função `info` que nos retorna os dados válidos, abaixo podemos ver como saber a quantidade de dados *nulos* em nosso dataframe.
+
+```{python}
+df.isnull().sum() # mostra a quantidade de valores ausentes por variável 
+```
+
+Por fim, abaixo podemos ver a utilização das funções `upper` e `lower` que transforma todos os caracters de uma string para maiúsculo e tranforma todos os caracters de uma string para minúsculo, respectivamente. 
+
+```{python}
+df.country.str.upper().head()
+df.country.str.lower().head()
+```
+
