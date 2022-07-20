@@ -1,0 +1,10 @@
+---
+title: "Desafio 2"
+author: "Lucas Lacerda Oliveira"
+date: "2022-07-07"
+categories: [phyton, re]
+---
+
+```{r echo=FALSE}
+shiny::includeMarkdown("C:/Users/Lucas/Desktop/arquivos_md/Desafio2.md")
+```

@@ -2,7 +2,9 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/pandas/Pandas as pd.html",
+      "/posts/desafio1/index.html",
+      "/posts/desafio2/index.html",
+      "/posts/desafio3/index.html",
       "/posts/pandas/index.html",
       "/posts/genomas_python/index.html"
     ]

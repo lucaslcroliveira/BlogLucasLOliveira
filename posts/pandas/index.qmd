@@ -6,6 +6,5 @@ categories: [phyton, pandas]
 ---
 
 ```{r echo=FALSE}
-shiny::includeMarkdown("Pandas as pd.md")
-
+shiny::includeMarkdown("C:/Users/Lucas/Desktop/arquivos_md/Pandas as pd.md")
 ```

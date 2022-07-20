@@ -1,0 +1,14 @@
+{
+  "hash": "2179f34f108899823f831608ff99b591",
+  "result": {
+    "markdown": "---\ntitle: \"Desafio 2\"\nauthor: \"Lucas Lacerda Oliveira\"\ndate: \"2022-07-07\"\ncategories: [phyton, re]\n---\n\n::: {.cell}\n::: {.cell-output-display}\n```{=html}\n<h2>Desafio 2</h2>\n\n<p>Os correios precisam melhorar o sistema de entrega das correspondências e para isso contrataram você. Um arquivo com diversas informações foi disponibilizado com: Nomes, datas de nascimento, endereços, CEP&#39;s e o nome da cidade. As informações devem seguir o seguinte formato:</p>\n\n<p>João Carlos da Silva dos Santos Júnior|14/05/1987|Rua Carijós de Macedo|50|22222-222|Rio de Janeiro</p>\n\n<p>Romulo Henrique|14/06/1973|Rua do Lins|120|12345-322|Recife</p>\n\n<p>Leonardo Cordeiro dos Santos|01/01/1995|Rua de Campo Grande|01|00001-234|São Paulo</p>\n\n<p>Solicita-se uma ER que realize esse trabalho e ajude os correios!</p>\n\n<pre><code class=\"python\">import re\n</code></pre>\n\n<pre><code class=\"python\">texto = &#39;&#39;&#39;\nJoão Carlos da Silva dos Santos Júnior|14/05/1987|Rua Carijós de Macedo|50|22222-222|Rio de Janeiro\nRomulo Henrique|14/06/1973|Rua do Lins|120|12345-322|Recife\nLeonardo Cordeiro dos Santos|01/01/1995|Rua de Campo Grande|01|00001-234|São Paulo\n&#39;&#39;&#39;\n</code></pre>\n\n<pre><code class=\"python\">padrao = re.compile(r&#39;[a-zA-Z\\száàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+\\|[0-9/]+\\|[\\w\\-\\száàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+\\|[0-9]+\\|[0-9\\-]+\\|[a-zA-Z\\száàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+&#39;)\nbusca = padrao.findall(texto)\n\nfor i in busca:\n    print(i)\n</code></pre>\n\n<pre><code>João Carlos da Silva dos Santos Júnior|14/05/1987|Rua Carijós de Macedo|50|22222-222|Rio de Janeiro\nRomulo Henrique\nRecife\nLeonardo Cordeiro dos Santos|01/01/1995|Rua de Campo Grande|01|00001-234|São Paulo\n</code></pre>\n\n```\n:::\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

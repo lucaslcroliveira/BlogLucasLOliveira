@@ -1,0 +1,10 @@
+---
+title: "Raspando base de dados sobre população do ES"
+author: "Lucas Lacerda Oliveira"
+date: "2022-07-07"
+categories: [phyton, BeautifulSoup]
+---
+
+```{r echo=FALSE}
+shiny::includeMarkdown("C:/Users/Lucas/Desktop/arquivos_md/Desafio3.md")
+```
