@@ -1,0 +1,90 @@
+---
+title: "Construindo base de dados"
+subtitle: "Desafio WebScraping"
+author: "Lucas Lacerda Oliveira"
+date: "2022-07-22"
+categories: [phyton, BeautifulSoup, requests, numpy, etree]
+---
+
+```{python}
+#https://webscraper.io/test-sites/e-commerce/allinone/computers/laptops
+
+import pandas as pd
+import numpy as np
+import requests
+from bs4 import BeautifulSoup
+from lxml import etree
+
+url = requests.get('https://webscraper.io/test-sites/e-commerce/allinone/computers/laptops')
+
+print(url.status_code)
+```
+
+```{python}
+soup = BeautifulSoup(url.content,'html.parser')
+```
+
+```{python}
+nomes = soup.find_all('a', attrs={'class':'title'})
+
+nomes = [i.text for i in nomes]
+
+print(nomes)
+```
+
+```{python}
+titulos = soup.find_all('p', attrs={'class':'description'})
+
+titulos = [i.text for i in titulos]
+
+print(titulos)
+```
+
+```{python}
+precos = soup.find_all('h4', attrs = {'class':'pull-right price'})
+
+precos = [float(i.text.split('$')[1]) for i in precos]
+
+print(precos)
+```
+
+```{python}
+reviews = soup.find_all('p', attrs = {'class':'pull-right'})
+
+reviews = [int(i.text.split()[0]) for i in reviews]
+
+print(reviews)
+```
+
+```{python}
+path = etree.HTML(str(soup))
+
+estrelas = path.xpath('//div[@class="ratings"]//p[2]')
+
+estrelas = [int(i.get('data-rating')) for i in estrelas]
+
+print(estrelas)
+```
+
+```{python}
+links = path.xpath('//div[@class="caption"]//h4[2]//a')
+
+links = [i.get('href') for i in links]
+
+print(links)
+```
+
+```{python}
+df = pd.DataFrame(
+    {
+     "Nomes": nomes,
+     "Descrição": titulos,
+     "Preços": precos,
+     "Links": links,
+     "Estrelas": estrelas,
+     "Reviews": reviews
+    }
+)
+
+df
+```

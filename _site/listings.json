@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/desafio-webscraping/index.html",
       "/posts/desafio-1/index.html",
       "/posts/desafio-2/index.html",
       "/posts/explorando-pandas/index.html",

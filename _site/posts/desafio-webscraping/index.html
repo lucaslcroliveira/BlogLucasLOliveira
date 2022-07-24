@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.562">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Lucas Lacerda Oliveira">
+<meta name="dcterms.date" content="2022-07-07">
+
+<title>Início - Construindo base de dados</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Início</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">Sobre</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/lucaslcroliveira"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Construindo base de dados</h1>
+            <p class="subtitle lead">Desafio WebScraping</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">phyton</div>
+                <div class="quarto-category">BeautifulSoup</div>
+                <div class="quarto-category">requests</div>
+                <div class="quarto-category">numpy</div>
+                <div class="quarto-category">etree</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Lucas Lacerda Oliveira </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">July 7, 2022</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#https://webscraper.io/test-sites/e-commerce/allinone/computers/laptops</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> lxml <span class="im">import</span> etree</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> requests.get(<span class="st">'https://webscraper.io/test-sites/e-commerce/allinone/computers/laptops'</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(url.status_code)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>200</code></pre>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>soup <span class="op">=</span> BeautifulSoup(url.content,<span class="st">'html.parser'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>nomes <span class="op">=</span> soup.find_all(<span class="st">'a'</span>, attrs<span class="op">=</span>{<span class="st">'class'</span>:<span class="st">'title'</span>})</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>nomes <span class="op">=</span> [i.text <span class="cf">for</span> i <span class="kw">in</span> nomes]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(nomes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['Asus VivoBook X4...', 'Prestigio SmartB...', 'Prestigio SmartB...', 'Aspire E1-510', 'Lenovo V110-15IA...', 'Lenovo V110-15IA...', 'Hewlett Packard...', 'Acer Aspire 3 A3...', 'Acer Aspire A315...', 'Acer Aspire ES1-...', 'Acer Aspire 3 A3...', 'Acer Aspire 3 A3...', 'Asus VivoBook Ma...', 'Asus VivoBook E5...', 'Lenovo ThinkPad...', 'Acer Aspire 3 A3...', 'Lenovo V110-15IS...', 'Acer Aspire ES1-...', 'Asus VivoBook 15...', 'Packard 255 G2', 'Asus EeeBook R41...', 'Acer Aspire 3 A3...', 'Acer Aspire ES1-...', 'Acer Extensa 15...', 'Acer Aspire ES1-...', 'Lenovo V110-15IS...', 'Acer Aspire A315...', 'Lenovo V110-15IK...', 'Asus VivoBook 15...', 'Acer Aspire ES1-...', 'Lenovo V510 Blac...', 'Acer Aspire ES1-...', 'Lenovo V510 Blac...', 'Acer Swift 1 SF1...', 'Dell Vostro 15', 'Acer Aspire 3 A3...', 'Dell Vostro 15 (...', 'Lenovo V510 Blac...', 'HP 250 G3', 'Acer Spin 5', 'HP 350 G1', 'Aspire E1-572G', 'Pavilion', 'Acer Aspire A515...', 'Dell Inspiron 15', 'Asus VivoBook S1...', 'ProBook', 'Inspiron 15', 'Asus ROG STRIX G...', 'Acer Nitro 5 AN5...', 'Asus ROG STRIX G...', 'Lenovo ThinkPad...', 'ThinkPad Yoga', 'Lenovo ThinkPad...', 'Dell Inspiron 15...', 'MSI GL72M 7RDX', 'MSI GL72M 7RDX', 'Asus ROG Strix G...', 'Dell Latitude 52...', 'Dell Latitude 54...', 'Lenovo Legion Y5...', 'Toshiba Portege...', 'Acer Predator He...', 'Acer Aspire 7 A7...', 'Dell Inspiron 17...', 'Dell Latitude 54...', 'Lenovo Legion Y5...', 'Asus AsusPro Adv...', 'Acer Nitro 5 AN5...', 'Dell Latitude 54...', 'Dell Inspiron 15...', 'Dell Latitude 55...', 'Lenovo Legion Y5...', 'MSI GP62M 7RDX L...', 'Lenovo Yoga 720...', 'Toshiba Portege...', 'Acer TravelMate...', 'Dell Latitude 55...', 'ThinkPad T540p', 'MSI GS63 7RD Ste...', 'Dell Latitude 54...', 'Acer Predator He...', 'MSI GL62M 7REX', 'MSI GL62M 7REX2', 'Lenovo Yoga 910...', 'Toshiba Portege...', 'Lenovo IdeaPad M...', 'Acer Predator He...', 'ThinkPad Yoga', 'Asus VivoBook Pr...', 'Dell Latitude 54...', 'Asus ZenBook UX5...', 'ThinkPad X230', 'Asus ROG Strix G...', 'Apple MacBook Ai...', 'Dell Latitude 54...', 'Hewlett Packard...', 'Dell XPS 13', 'Toshiba Portege...', 'MSI GL62VR 7RFX', 'Dell Latitude 54...', 'ThinkPad X240', 'Hewlett Packard...', 'Apple MacBook Pr...', 'Dell Latitude 55...', 'Dell Latitude 54...', 'Dell Latitude 55...', 'Apple MacBook Ai...', 'Lenovo ThinkPad...', 'Lenovo ThinkPad...', 'Toshiba Portege...', 'Asus ASUSPRO B94...', 'Lenovo Legion Y7...', 'Asus ROG Strix G...', 'Asus ROG Strix G...', 'Asus ROG Strix G...', 'Asus ROG Strix S...']</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>titulos <span class="op">=</span> soup.find_all(<span class="st">'p'</span>, attrs<span class="op">=</span>{<span class="st">'class'</span>:<span class="st">'description'</span>})</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>titulos <span class="op">=</span> [i.text <span class="cf">for</span> i <span class="kw">in</span> titulos]</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(titulos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['Asus VivoBook X441NA-GA190 Chocolate Black, 14", Celeron N3450, 4GB, 128GB SSD, Endless OS, ENG kbd', 'Prestigio SmartBook 133S Dark Grey, 13.3" FHD IPS, Celeron N3350 1.1GHz, 4GB, 32GB, Windows 10 Pro + Office 365 1 gadam', 'Prestigio SmartBook 133S Gold, 13.3" FHD IPS, Celeron N3350 1.1GHz, 4GB, 32GB, Windows 10 Pro + Office 365 1 gadam', '15.6", Pentium N3520 2.16GHz, 4GB, 500GB, Linux', 'Lenovo V110-15IAP, 15.6" HD, Celeron N3350 1.1GHz, 4GB, 128GB SSD, Windows 10 Home', 'Asus VivoBook 15 X540NA-GQ008T Chocolate Black, 15.6" HD, Pentium N4200, 4GB, 500GB, Windows 10 Home, En kbd', 'Hewlett Packard 250 G6 Dark Ash Silver, 15.6" HD, Celeron N3060 1.6GHz, 4GB, 128GB SSD, DOS', 'Acer Aspire 3 A315-31 Black, 15.6" HD, Celeron N3350 1.1GHz, 4GB, 128GB SSD, Windows 10 Home', 'Acer Aspire A315-31-C33J Black 15.6", HD, Celeron N3350, 4GB DDR3L, 128GB, Windows 10 Home, ENG', 'Acer Aspire ES1-572 Black, 15.6" HD, Core i3-6006U, 4GB, 128GB SSD, Linux', 'Acer Aspire 3 A315-31 Black, 15.6" HD, Pentium N4200 1.1GHz, 4GB, 128GB SSD, Windows 10 Home', 'Acer Aspire 3 A315-21, 15.6", AMD A4-9120. 4GB. 128GB SSD, Linux', 'Asus VivoBook Max X541NA-GQ041 Black Chocolate, 15.6" HD, Pentium N4200 1.1GHz, 4GB, 500GB, Windows 10 Home', 'Asus VivoBook E502NA-GO022T Dark Blue, 15.6" HD, Pentium N4200 1.1GHz, 4GB, 128GB SSD, Windows 10 Home, En/Ru kbd', 'Lenovo ThinkPad E31-80, 13.3" HD, Celeron 3855U 1.6GHz, 4GB, 128GB SSD, Windows 10 Home', 'Acer Aspire 3 A315-31 Black, 15.6" HD, Pentium N4200 1.1GHz, 4GB, 128GB SSD, Windows 10 Home', 'Lenovo V110-15ISK, 15.6" HD, Core i3-6006U, 8GB, 128GB SSD, Windows 10 Home', 'Acer Aspire ES1-732 Black, 17.3" HD+, Celeron, N3350, 4GB, 1TB, Windows 10 Home', 'Asus VivoBook 15 X540NA-GQ026T Chocolate Black, 15.6" HD, Pentium N4200, 4GB, 128GB SSD, Windows 10 Home, En/Ru kbd', '15.6", AMD E2-3800 1.3GHz, 4GB, 500GB, Windows 8.1', 'Asus EeeBook R416NA-FA014T, 14" FHD, Pentium N4200, 4GB, 128GB eMMC, Windows 10 Home, Eng kbd', 'Acer Aspire 3 A315-51, 15.6" HD, Core i3-6006U, 4GB, 1TB, Windows 10 Home', 'Acer Aspire ES1-572 Black, 15.6" HD, Core i3-6006U, 4GB, 500GB, Windows 10 Home', 'Acer Extensa 15 (2540) Black, 15.6" HD, Core i5-7200U, 4GB, 500GB, Linux', 'Acer Aspire ES1-572 Black, 15.6" HD, Core i5-7200U, 4GB, 500GB, Linux', 'Lenovo V110-15ISK, 15.6" HD, Core i3-6006U, 4GB, 128GB SSD, Windows 10 Pro', 'Acer Aspire A315-51-33TG, Black 15.6" HD, Core i3-7100U, 4GB DDR4, 128GB SSD, Windows 10 Home, ENG', 'Lenovo V110-15IKB, 15.6" HD, Core i5-7200U, 4GB, 500GB, DOS', 'Asus VivoBook 15 X540UA-DM260 Chocolate Black, 15.6" FHD, Core i3-6006U, 4GB, 256GB SSD, Endless OS, En kbd', 'Acer Aspire ES1-572 Black, 15.6" HD, Core i3-6006U, 4GB, 128GB SSD, Windows 10 Home', 'Lenovo V510 Black, 14" HD, Core i3-6006U, 4GB, 128GB SSD, Windows 10 Home', 'Acer Aspire ES1-572 Black, 15.6" HD, Core i5-7200U, 4GB, 128GB SSD, Linux', 'Lenovo V510 Black, 15.6" HD, Core i3-6006U, 4GB, 128GB SSD, Windows 10 Home', 'Acer Swift 1 SF113-31 Silver, 13.3" FHD, Pentium N4200, 4GB, 128GB SSD, Windows 10 Home', 'Dell Vostro 15 (3568) Black, 15.6" FHD, Core i5-7200U, 4GB, 128GB SSD, Radeon R5 M420 2GB, Linux', 'Acer Aspire 3 A315-51 Black, 15.6" FHD, Core i3-7100U, 4GB, 500GB + 128GB SSD, Windows 10 Home', 'Dell Vostro 15 (3568) Red, 15.6" HD, Core i5-7200U, 4GB, 1TB, Radeon R5 M420 2GB, Linux', 'Lenovo V510 Black, 15.6" FHD, Core i3-7100U, 4GB, 128GB SSD, Windows 10 Pro', '15.6", Core\xa0i5-4210U, 4GB, 500GB, Windows 8.1', 'Acer Spin 5 SP513-51 Black, 13.3" FHD Touch, Core i3-7100U, 4GB, 128GB SSD, Windows 10 Home', '15.6", Core i5-4200U, 4GB, 750GB, Radeon HD8670M 2GB, Windows', '15.6", Core i5-4200U, 8GB, 1TB, Radeon R7 M265, Windows 8.1', '15.6", Core i5-4200U, 6GB, 750GB, Windows 8.1', 'Acer Aspire A515-51-5654, Black, 15.6", FHD, Core i5-8250U, 8GB DDR4, 256GB SSD, Windows 10 Home, ENG', 'Dell Inspiron 15 (5567) Fog Gray, 15.6" FHD, Core i5-7200U, 8GB, 1TB, Radeon R7 M445 4GB, Linux', 'Asus VivoBook S14 (S406UA-BV041T) Starry Grey, 14", Core i5-8250U, 8GB, 256GB SSD, Windows 10 Home, Eng kbd', '14", Core i5 2.6GHz, 4GB, 500GB, Win7 Pro 64bit', 'Moon Silver, 15.6", Core i7-4510U, 8GB, 1TB, Radeon HD R7 M265 2GB,', 'Asus ROG STRIX GL553VD-DM256, 15.6" FHD, Core i5-7300HQ, 8GB, 1TB, GeForce GTX 1050 2GB, No OS', 'Acer Nitro 5 AN515-51, 15.6" FHD IPS, Core i5-7300HQ, 8GB, 1TB, GeForce GTX 1050 2GB, Windows 10 Home', 'Asus ROG STRIX GL553VD-DM256, 15.6" FHD, Core i5-7300HQ, 8GB, 1TB, GeForce GTX 1050 2GB, No OS + Windows 10 Home', 'Lenovo ThinkPad L570, 15.6" FHD, Core i7-7500U, 8GB, 256GB SSD, Windows 10 Pro', '12.5" Touch, Core i3-4010U, 4GB, 500GB + 16GB SSD Cache,', 'Lenovo ThinkPad L460, 14" FHD IPS, Core i7-6600U, 8GB, 256GB SSD, Windows 10 Pro', 'Dell Inspiron 15 (7567) Black, 15.6" FHD, Core i5-7300HQ, 8GB, 256GB SSD, GeForce GTX 1050 4GB, Windows 10 Home', 'MSI GL72M 7RDX, 17.3" FHD, Core i5-7300HQ, 8GB, 1TB + 128GB SSD, GeForce GTX 1050 2GB, Windows 10 Home', 'Asus ROG Strix GL553VD-DM535T, 15.6" FHD, Core i7-7700HQ, 8GB, 1TB + 128GB SSD, GeForce GTX 1050 2GB, Windows 10 Home, Eng kbd', 'Apple MacBook Air 13.3", Core i5 1.8GHz, 8GB, 128GB SSD, Intel HD 4000, RUS', 'Dell Latitude 5280, 12.5" HD, Core i5-7300U, 8GB, 256GB SSD, Windows 10 Pro', 'Dell Latitude 5480, 14" FHD, Core i5-7300U, 8GB, 500GB, Linux + Windows 10 Home', 'Lenovo Legion Y520-15IKBM, Black, 15.6" FHD IPS, Core i5-7300HQ, 8 GB, 128GB SSD + 2 TB HDD, NVIDIA GeForce GTX 1060 6 GB, FreeDOS + Windows 10 Home', 'Toshiba Portege Z30-C-16J Grey, 13.3" FHD, Core i5-6200U, 8GB, 256GB SSD, Windows 10 Pro', 'Acer Predator Helios 300 (PH317-51), 17.3" FHD IPS, Core i5-7300HQ, 8GB, 1TB + 128GB SSD, GeForce GTX 1050Ti 4GB, Windows 10 Home', 'Acer Aspire 7 A715-71G, 15.6" FHD IPS, Core i7-7700HQ, 8GB, 128GB SSD + 1TB HDD, GTX 1050 Ti 4GB, Windows 10 Home', 'Dell Inspiron 17 2in1 (7779) Silver, 17.3" FHD Touch, Core i5-7200U, 12GB, 1TB, GeForce GT940MX 2GB, Windows 10 Home', 'Dell Latitude 5480, 14" FHD, Core i5-7300U, 8GB, 500GB, Windows 10 Pro', 'Lenovo Legion Y520, 15.6" FHD, Core i7-7700HQ, 8GB, 128 GB SSD + 1TB HDD, GTX 1050 4GB, Windows 10 Home', 'Asus AsusPro Advanced BU401LA-FA271G Dark Grey, 14", Core i5-4210U, 4GB, 128GB SSD, Win7 Pro 64bit, ENG', 'Acer Nitro 5 AN515-51, 15.6" FHD IPS, Core i7-7700HQ, 8GB, 256GB SSD +1TB, GeForce GTX 1050 Ti 4GB, Windows 10 Home + Windows 10 Home', 'Dell Latitude 5480, 14" FHD, Core i5-7440HQ, 8GB, 256GB SSD, Windows 10 Pro', 'Dell Inspiron 15 (7567) Black, 15.6" FHD, Core i7-7700HQ, 8GB, 1TB, GeForce GTX 1050 Ti 4GB, Linux + Windows 10 Home', 'Dell Latitude 5580, 15.6" FHD, Core i5-7300U, 8GB, 256GB SSD, Windows 10 Pro', 'Lenovo Legion Y520-15IKBM, 15.6" FHD IPS, Core i7-7700HQ, 8GB, 128GB SSD + 1TB, GeForce GTX 1060 Max-Q 6GB, DOS', 'MSI GP62M 7RDX Leopard, 15.6" FHD, Core i7-7700HQ, 8GB, 1TB + 128GB SSD, GeForce GTX 1050 2GB, Windows 10 Home', 'Lenovo Yoga 720 Grey, 15.6" FHD IPS, Core i5-7300HQ, 8GB, 256GB SSD, GeForce GTX 1050 2GB, Windows 10 Home', 'Toshiba Portege Z30-C-16L Grey, 13.3" FHD, Core i7-6500U, 8GB, 256GB SSD, Windows 10 Pro', 'Acer TravelMate P645-S-511A Black, 14" FHD IPS, Core i5-5200U, 8GB, 256GB SSD, 3G, Windows 10 Pro', 'Dell Latitude 5580, 15.6" FHD, Core i5-7300U, 16GB, 256GB SSD, Linux + Windows 10 Home', '15.6", Core i5-4200M, 4GB, 500GB, Win7 Pro 64bit', 'MSI GS63 7RD Stealth, 15.6" FHD IPS, Core i7-7700HQ, 8GB, 256GB SSD, GeForce GTX 1050 2GB, DOS + Windows 10 Home', 'Dell Latitude 5480, 14" FHD, Core i5-7300U, 8GB, 256GB SSD, Windows 10 Pro', 'Acer Predator Helios 300 (PH317-51), 17.3" FHD IPS, Core i7-7700HQ. 8GB, 128GB SSD +1TB, GeForce GTX 1050Ti 4GB, Linux + Windows 10 Home', 'MSI GL62M 7REX, 15.6" FHD, Core i7-7700HQ, 8GB, 1TB + 128GB SSD, GeForce GTX 1050 Ti 2GB, Windows 10 Home', 'MSI GL62M 7REX2, 15.6" FHD, Core i7-7700HQ, 8GB, 1TB + 128GB SSD, GeForce GTX 1050 Ti 2GB, Windows 10 Home', 'Lenovo Yoga 910 Grey, 13.9" FHD Touch, Core i5-7200U, 8GB, 256GB SSD, Windows 10 Home', 'Toshiba Portege X30-D-10J Black/Blue, 13.3" FHD IPS, Core i5-7200U, 8GB, 256GB SSD, Windows 10 Pro', 'Lenovo IdeaPad Miix 510 Platinum Silver, 12.2" IPS Touch, Core i5-7200U, 8GB, 256GB SSD, 4G, Windows 10 Pro', 'Acer Predator Helios 300 (PH317-51), 17.3" FHD IPS, Core i7-7700HQ, 8GB, 1TB + 128GB SSD, GeForce GTX 1050 Ti 4GB, Windows 10 Home', '12.5" Touch, Core i5 4200U, 8GB, 500GB + 16GB SSD Cache, Windows', 'Asus VivoBook Pro 15 N580VN-FI006T Gold Metal, 15.6" UHD, Core i7-7700HQ, 16GB, 1TB + 256GB SSD, GeForce MX150 2GB, Windows 10 Home, Eng kbd', 'Dell Latitude 5480, 14" FHD, Core i7-7600U, 8GB, 256GB SSD, Linux', 'Asus ZenBook UX530UX-FY040T Blue, 15.6" FHD, Core i7-7500U, 8GB, 512GB SSD, GeForce GTX950M 2GB, Windows 10 Home, Eng kbd', '12.5", Core i5 2.6GHz, 8GB, 180GB SSD, Win7 Pro 64bit', 'Asus ROG Strix GL753VE-GC096T, 17.3" FHD, Core i7-7700HQ, 8GB, 1TB + 128GB SSD, GeForce GTX 1050 Ti 4GB, Windows 10 Home, Eng kbd', 'Apple MacBook Air 13", i5 1.8GHz, 8GB, 256GB SSD, Intel HD 6000, ENG', 'Dell Latitude 5480, 14" FHD, Core i7-7600U, 8GB, 1TB, GeForce GT930MX, Windows 10 Pro', 'Hewlett Packard Spectre 13-v106na Dark Ash Silver, 13.3" FHD IPS, Core i5-7200U, 8GB, 256GB SSD, Windows 10 Home', '13.3" Touch, Core i5-4210U, 8GB, 128GB SSD, Windows 8.1', 'Toshiba Portege Z30-C-16K Grey, 13.3" FHD, Core i5-6200U, 8GB, 256GB SSD, 4G, Windows 10 Pro', 'MSI GL62VR 7RFX, 15.6" FHD, Core i7-7700HQ, 8GB, 1TB + 256GB SSD, GeForce GTX 1060 3GB, Windows 10 Home', 'Dell Latitude 5480, 14" FHD, Core i7-7600U, 8GB, 256GB SSD, Windows 10 Pro', '12.5", Core i5-4300U, 8GB, 240GB SSD, Win7 Pro 64bit', 'Hewlett Packard ProBook 640 G3, 14" FHD, Core i7-7600U, 8GB, 256GB SSD, Windows 10 Pro', 'Apple MacBook Pro 13" Space Gray, Core i5 2.3GHz, 8GB, 128GB SSD, Iris Plus 640, ENG', 'Dell Latitude 5580, 15.6" FHD, Core i7-7600U, 8GB, 256GB SSD, GeForce GT930MX, Windows 10 Pro', 'Dell Latitude 5480, 14" FHD, Core i7-7600U, 8GB, 256GB SSD, Linux + Windows 10 Home', 'Dell Latitude 5580, 15.6" FHD, Core i7-7600U, 16GB, 256GB SSD, GeForce GT930MX, Linux', 'Apple MacBook Air 13", Intel Core i5 1.8GHz, 8GB, 256GB SSD, Intel HD 6000, RUS', 'Lenovo ThinkPad T470, 14" FHD IPS, Core i5-7200U, 8GB, 256GB SSD, Windows 10 Pro', 'Lenovo ThinkPad Yoga 370 Black, 13.3" FHD IPS Touch, Core i5-7200U, 8GB, 256GB SSD, 4G, Windows 10 Pro', 'Toshiba Portege X20W-D-10V Black/Blue, 12.5" FHD Touch, Core i7-7500U, 8GB, 512GB SSD, Windows 10 Pro', 'Asus ASUSPRO B9440UA-GV0279R Gray, 14" FHD, Core i7-7500U, 16GB, 512GB SSD, Windows 10 Pro, Eng kbd', 'Lenovo Legion Y720, 15.6" FHD IPS, Core i7-7700HQ, 8GB, 128GB SSD + 2TB HDD, GeForce GTX 1060 6GB, DOS, RGB backlit keyboard', 'Asus ROG Strix GL702VM-GC146T, 17.3" FHD, Core i7-7700HQ, 8GB, 1TB + 128GB SSD, GeForce GTX 1060 3GB, Windows 10 Home, Eng kbd', 'Asus ROG Strix GL702ZC-GC154T, 17.3" FHD, Ryzen 7 1700, 16GB, 256GB + 1TB HDD, Radeon RX 580 4GB, Windows 10 Home', 'Asus ROG Strix GL702ZC-GC209T, 17.3" FHD IPS, Ryzen 7 1700, 16GB, 256GB SSD + 1TB HDD, Radeon RX 580 4GB, Windows 10 Home', 'Asus ROG Strix SCAR Edition GL503VM-ED115T, 15.6" FHD 120Hz, Core i7-7700HQ, 16GB, 256GB SSD + 1TB SSHD, GeForce GTX 1060 6GB, Windows 10 Home']</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>precos <span class="op">=</span> soup.find_all(<span class="st">'h4'</span>, attrs <span class="op">=</span> {<span class="st">'class'</span>:<span class="st">'pull-right price'</span>})</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>precos <span class="op">=</span> [<span class="bu">float</span>(i.text.split(<span class="st">'$'</span>)[<span class="dv">1</span>]) <span class="cf">for</span> i <span class="kw">in</span> precos]</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(precos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[295.99, 299.0, 299.0, 306.99, 321.94, 356.49, 364.46, 372.7, 379.94, 379.95, 391.48, 393.88, 399.0, 399.99, 404.23, 408.98, 409.63, 410.46, 410.66, 416.99, 433.3, 436.29, 436.29, 439.73, 454.62, 454.73, 457.38, 465.95, 468.56, 469.1, 484.23, 485.9, 487.8, 488.64, 488.78, 494.71, 497.17, 498.23, 520.99, 564.98, 577.99, 581.99, 609.99, 679.0, 679.0, 729.0, 739.99, 745.99, 799.0, 809.0, 899.0, 999.0, 1033.99, 1096.02, 1098.42, 1099.0, 1099.0, 1101.83, 1102.66, 1110.14, 1112.91, 1114.55, 1123.87, 1123.87, 1124.2, 1133.82, 1133.91, 1139.54, 1140.62, 1143.4, 1144.2, 1144.4, 1149.0, 1149.0, 1149.73, 1154.04, 1170.1, 1178.19, 1178.99, 1179.0, 1187.88, 1187.98, 1199.0, 1199.0, 1199.73, 1203.41, 1212.16, 1221.58, 1223.99, 1235.49, 1238.37, 1239.2, 1244.99, 1259.0, 1260.13, 1271.06, 1273.11, 1281.99, 1294.74, 1299.0, 1310.39, 1311.99, 1326.83, 1333.0, 1337.28, 1338.37, 1341.22, 1347.78, 1349.23, 1362.24, 1366.32, 1381.13, 1399.0, 1399.0, 1769.0, 1769.0, 1799.0]</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>reviews <span class="op">=</span> soup.find_all(<span class="st">'p'</span>, attrs <span class="op">=</span> {<span class="st">'class'</span>:<span class="st">'pull-right'</span>})</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>reviews <span class="op">=</span> [<span class="bu">int</span>(i.text.split()[<span class="dv">0</span>]) <span class="cf">for</span> i <span class="kw">in</span> reviews]</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(reviews)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[14, 8, 12, 2, 5, 6, 12, 2, 0, 9, 10, 9, 4, 3, 12, 10, 9, 14, 4, 2, 1, 1, 2, 6, 9, 2, 9, 7, 1, 5, 8, 6, 9, 4, 14, 2, 9, 5, 13, 0, 10, 2, 4, 9, 7, 2, 8, 12, 7, 0, 7, 11, 13, 14, 7, 1, 9, 4, 8, 4, 1, 0, 1, 4, 10, 14, 13, 7, 14, 5, 2, 10, 11, 11, 12, 7, 0, 6, 2, 2, 5, 14, 7, 12, 7, 13, 0, 9, 2, 10, 0, 14, 10, 7, 8, 13, 8, 4, 6, 1, 8, 12, 2, 0, 6, 11, 3, 11, 5, 12, 11, 4, 8, 10, 7, 8, 8]</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>path <span class="op">=</span> etree.HTML(<span class="bu">str</span>(soup))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>estrelas <span class="op">=</span> path.xpath(<span class="st">'//div[@class="ratings"]//p[2]'</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>estrelas <span class="op">=</span> [<span class="bu">int</span>(i.get(<span class="st">'data-rating'</span>)) <span class="cf">for</span> i <span class="kw">in</span> estrelas]</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(estrelas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[3, 2, 4, 3, 3, 2, 1, 2, 2, 4, 4, 3, 1, 4, 1, 4, 3, 4, 4, 2, 1, 1, 1, 4, 1, 2, 3, 1, 3, 3, 3, 3, 2, 3, 4, 4, 1, 3, 2, 2, 2, 1, 1, 2, 2, 1, 4, 3, 2, 1, 1, 3, 2, 4, 1, 4, 1, 2, 1, 3, 4, 1, 2, 2, 3, 4, 1, 3, 3, 4, 1, 3, 3, 1, 2, 1, 1, 3, 1, 1, 3, 3, 1, 2, 3, 4, 4, 1, 3, 2, 2, 1, 3, 4, 4, 1, 3, 3, 1, 3, 3, 3, 1, 1, 1, 2, 3, 2, 1, 2, 1, 1, 3, 3, 4, 1, 3]</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>links <span class="op">=</span> path.xpath(<span class="st">'//div[@class="caption"]//h4[2]//a'</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>links <span class="op">=</span> [i.get(<span class="st">'href'</span>) <span class="cf">for</span> i <span class="kw">in</span> links]</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(links)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['/test-sites/e-commerce/allinone/product/545', '/test-sites/e-commerce/allinone/product/546', '/test-sites/e-commerce/allinone/product/547', '/test-sites/e-commerce/allinone/product/517', '/test-sites/e-commerce/allinone/product/548', '/test-sites/e-commerce/allinone/product/549', '/test-sites/e-commerce/allinone/product/550', '/test-sites/e-commerce/allinone/product/551', '/test-sites/e-commerce/allinone/product/552', '/test-sites/e-commerce/allinone/product/553', '/test-sites/e-commerce/allinone/product/554', '/test-sites/e-commerce/allinone/product/555', '/test-sites/e-commerce/allinone/product/530', '/test-sites/e-commerce/allinone/product/556', '/test-sites/e-commerce/allinone/product/557', '/test-sites/e-commerce/allinone/product/558', '/test-sites/e-commerce/allinone/product/559', '/test-sites/e-commerce/allinone/product/560', '/test-sites/e-commerce/allinone/product/561', '/test-sites/e-commerce/allinone/product/516', '/test-sites/e-commerce/allinone/product/562', '/test-sites/e-commerce/allinone/product/563', '/test-sites/e-commerce/allinone/product/564', '/test-sites/e-commerce/allinone/product/565', '/test-sites/e-commerce/allinone/product/566', '/test-sites/e-commerce/allinone/product/567', '/test-sites/e-commerce/allinone/product/568', '/test-sites/e-commerce/allinone/product/569', '/test-sites/e-commerce/allinone/product/570', '/test-sites/e-commerce/allinone/product/571', '/test-sites/e-commerce/allinone/product/572', '/test-sites/e-commerce/allinone/product/573', '/test-sites/e-commerce/allinone/product/574', '/test-sites/e-commerce/allinone/product/575', '/test-sites/e-commerce/allinone/product/531', '/test-sites/e-commerce/allinone/product/576', '/test-sites/e-commerce/allinone/product/577', '/test-sites/e-commerce/allinone/product/578', '/test-sites/e-commerce/allinone/product/527', '/test-sites/e-commerce/allinone/product/532', '/test-sites/e-commerce/allinone/product/529', '/test-sites/e-commerce/allinone/product/521', '/test-sites/e-commerce/allinone/product/523', '/test-sites/e-commerce/allinone/product/533', '/test-sites/e-commerce/allinone/product/534', '/test-sites/e-commerce/allinone/product/535', '/test-sites/e-commerce/allinone/product/519', '/test-sites/e-commerce/allinone/product/524', '/test-sites/e-commerce/allinone/product/536', '/test-sites/e-commerce/allinone/product/537', '/test-sites/e-commerce/allinone/product/538', '/test-sites/e-commerce/allinone/product/539', '/test-sites/e-commerce/allinone/product/522', '/test-sites/e-commerce/allinone/product/579', '/test-sites/e-commerce/allinone/product/580', '/test-sites/e-commerce/allinone/product/581', '/test-sites/e-commerce/allinone/product/582', '/test-sites/e-commerce/allinone/product/583', '/test-sites/e-commerce/allinone/product/584', '/test-sites/e-commerce/allinone/product/585', '/test-sites/e-commerce/allinone/product/586', '/test-sites/e-commerce/allinone/product/587', '/test-sites/e-commerce/allinone/product/588', '/test-sites/e-commerce/allinone/product/589', '/test-sites/e-commerce/allinone/product/590', '/test-sites/e-commerce/allinone/product/591', '/test-sites/e-commerce/allinone/product/592', '/test-sites/e-commerce/allinone/product/593', '/test-sites/e-commerce/allinone/product/594', '/test-sites/e-commerce/allinone/product/595', '/test-sites/e-commerce/allinone/product/596', '/test-sites/e-commerce/allinone/product/597', '/test-sites/e-commerce/allinone/product/540', '/test-sites/e-commerce/allinone/product/598', '/test-sites/e-commerce/allinone/product/599', '/test-sites/e-commerce/allinone/product/600', '/test-sites/e-commerce/allinone/product/601', '/test-sites/e-commerce/allinone/product/602', '/test-sites/e-commerce/allinone/product/518', '/test-sites/e-commerce/allinone/product/603', '/test-sites/e-commerce/allinone/product/604', '/test-sites/e-commerce/allinone/product/605', '/test-sites/e-commerce/allinone/product/606', '/test-sites/e-commerce/allinone/product/607', '/test-sites/e-commerce/allinone/product/608', '/test-sites/e-commerce/allinone/product/609', '/test-sites/e-commerce/allinone/product/610', '/test-sites/e-commerce/allinone/product/611', '/test-sites/e-commerce/allinone/product/528', '/test-sites/e-commerce/allinone/product/612', '/test-sites/e-commerce/allinone/product/613', '/test-sites/e-commerce/allinone/product/614', '/test-sites/e-commerce/allinone/product/526', '/test-sites/e-commerce/allinone/product/615', '/test-sites/e-commerce/allinone/product/616', '/test-sites/e-commerce/allinone/product/617', '/test-sites/e-commerce/allinone/product/618', '/test-sites/e-commerce/allinone/product/525', '/test-sites/e-commerce/allinone/product/619', '/test-sites/e-commerce/allinone/product/620', '/test-sites/e-commerce/allinone/product/621', '/test-sites/e-commerce/allinone/product/520', '/test-sites/e-commerce/allinone/product/622', '/test-sites/e-commerce/allinone/product/623', '/test-sites/e-commerce/allinone/product/624', '/test-sites/e-commerce/allinone/product/625', '/test-sites/e-commerce/allinone/product/626', '/test-sites/e-commerce/allinone/product/627', '/test-sites/e-commerce/allinone/product/628', '/test-sites/e-commerce/allinone/product/629', '/test-sites/e-commerce/allinone/product/630', '/test-sites/e-commerce/allinone/product/631', '/test-sites/e-commerce/allinone/product/541', '/test-sites/e-commerce/allinone/product/632', '/test-sites/e-commerce/allinone/product/542', '/test-sites/e-commerce/allinone/product/543', '/test-sites/e-commerce/allinone/product/544']</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Nomes"</span>: nomes,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Descrição"</span>: titulos,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Preços"</span>: precos,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Links"</span>: links,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Estrelas"</span>: estrelas,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Reviews"</span>: reviews</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Nomes</th>
+      <th>Descrição</th>
+      <th>Preços</th>
+      <th>Links</th>
+      <th>Estrelas</th>
+      <th>Reviews</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Asus VivoBook X4...</td>
+      <td>Asus VivoBook X441NA-GA190 Chocolate Black, 14...</td>
+      <td>295.99</td>
+      <td>/test-sites/e-commerce/allinone/product/545</td>
+      <td>3</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Prestigio SmartB...</td>
+      <td>Prestigio SmartBook 133S Dark Grey, 13.3" FHD ...</td>
+      <td>299.00</td>
+      <td>/test-sites/e-commerce/allinone/product/546</td>
+      <td>2</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Prestigio SmartB...</td>
+      <td>Prestigio SmartBook 133S Gold, 13.3" FHD IPS, ...</td>
+      <td>299.00</td>
+      <td>/test-sites/e-commerce/allinone/product/547</td>
+      <td>4</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Aspire E1-510</td>
+      <td>15.6", Pentium N3520 2.16GHz, 4GB, 500GB, Linux</td>
+      <td>306.99</td>
+      <td>/test-sites/e-commerce/allinone/product/517</td>
+      <td>3</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Lenovo V110-15IA...</td>
+      <td>Lenovo V110-15IAP, 15.6" HD, Celeron N3350 1.1...</td>
+      <td>321.94</td>
+      <td>/test-sites/e-commerce/allinone/product/548</td>
+      <td>3</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>112</th>
+      <td>Lenovo Legion Y7...</td>
+      <td>Lenovo Legion Y720, 15.6" FHD IPS, Core i7-770...</td>
+      <td>1399.00</td>
+      <td>/test-sites/e-commerce/allinone/product/541</td>
+      <td>3</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>113</th>
+      <td>Asus ROG Strix G...</td>
+      <td>Asus ROG Strix GL702VM-GC146T, 17.3" FHD, Core...</td>
+      <td>1399.00</td>
+      <td>/test-sites/e-commerce/allinone/product/632</td>
+      <td>3</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>114</th>
+      <td>Asus ROG Strix G...</td>
+      <td>Asus ROG Strix GL702ZC-GC154T, 17.3" FHD, Ryze...</td>
+      <td>1769.00</td>
+      <td>/test-sites/e-commerce/allinone/product/542</td>
+      <td>4</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>115</th>
+      <td>Asus ROG Strix G...</td>
+      <td>Asus ROG Strix GL702ZC-GC209T, 17.3" FHD IPS, ...</td>
+      <td>1769.00</td>
+      <td>/test-sites/e-commerce/allinone/product/543</td>
+      <td>1</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>116</th>
+      <td>Asus ROG Strix S...</td>
+      <td>Asus ROG Strix SCAR Edition GL503VM-ED115T, 15...</td>
+      <td>1799.00</td>
+      <td>/test-sites/e-commerce/allinone/product/544</td>
+      <td>3</td>
+      <td>8</td>
+    </tr>
+  </tbody>
+</table>
+<p>117 rows × 6 columns</p>
+</div>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
